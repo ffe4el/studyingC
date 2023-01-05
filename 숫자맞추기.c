@@ -9,7 +9,7 @@ int main(void){
     int answer = 0;
     int chance = 5;
     while(1){
-        printf("남은 기회는 %d 번 입니다.", chance--);
+        printf('남은 기회는 %d 번 입니다.', chance--);
         printf("숫자를 입력해주세요(1~100) : ");
         scanf("%d", &answer);
         if(answer < num){
