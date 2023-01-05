@@ -12,3 +12,4 @@ int main(void){
 void function_without_return(){
     printf("반환값이 없는 함수입니다.\n");
 }
+
