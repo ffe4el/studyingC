@@ -16,11 +16,11 @@ int dy[4] = { 0, 0, 1, -1 };    // 세로이동
 int tc;  // testcase
 
 
-void DFS(int x, int y, int cnt){
+void DFS(int x, int y, int cnt){   //DFS함수
     int next_x;
     int next_y;
-    if(cnt>res){
-        res = cnt;
+    if(cnt>res){    // 이전 카운트 개수랑 현재 카운트 개수랑 비교
+        res = cnt;  // 현재 카운트 개수가 이전 카운트 개수보다 크면 이전 카운트 개수에 현재 카운트 개수를 저장
     }
     gift[map[x][y]-'A']=1;   // 현재위치 알파벳 체크
     for(int i =0; i<4; i++){
@@ -29,11 +29,11 @@ void DFS(int x, int y, int cnt){
 
         if((next_x>=1 && next_x<=r)&&(next_y>=1 && next_y<=c)){  // 행열 범위 내에 있는지 체크
             if(gift[map[next_x][next_y]-'A']!=1){
-                DFS(next_x, next_y, cnt+1);     //재귀
+                DFS(next_x, next_y, cnt+1);     //재귀, 다시 dfs 함수를 돌면서 next_x,next_y에 있는 알파벳을 1처리 할것임
             }
         }
     }
-    gift[map[x][y]-'A']=0; //초기화
+    gift[map[x][y]-'A']=0; //초기화...
 
 }
 
