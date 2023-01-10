@@ -1,22 +1,20 @@
 #define _CRT_SECURE_NO_WARNINGS // scanf 보안 경고로 인한 컴파일 에러 방지
 #include <stdio.h>
 
-int x, y;
-char n[20];
-void rec(int n, int x, int y);
 
-void rec(int n, int x, int y){
-
-}
-
-int main(){
-    scanf("%s", n);
-    printf("%c\n", *n);
-    for(int i=0; i<sizeof(n)/sizeof(char); i++){
-        printf("*%d ", n[i]);
+int main() {
+    int buf[4] = {0, }; // 숫자 입력받을 배열 크기 : 3 
+    int size=0;
+    while(size >= sizeof(buf)/sizeof(int)){
+    	// %1d 를 사용해 하나씩 읽음 
+        scanf("%1d", &buf[size]);
+        size++;
     }
-    // scanf("%d %d", &x, &y);
-
+    while(size >= sizeof(buf)/sizeof(int)){
+    	// %1d 를 사용해 하나씩 읽음 
+        printf("%d, " ,buf[size] );
+        size++;
+    }
     
-
+    return 0;
 }
