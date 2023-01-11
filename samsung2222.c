@@ -33,7 +33,7 @@ int main() {
         }
         result = 0;
         recursive(0, 1);
-        printf("#%d %d", j+1,result);
+        printf("#%d %d\n", j+1,result);
     }
     return 0;
 }
