@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 
+
 int main() {
     int buf[] = {0, }; // 숫자 입력받을 배열 크기 : 3
 
