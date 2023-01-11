@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
+//이진수사용
+
 int temp;
 
 int decToBin(int temp){
@@ -48,7 +50,7 @@ int main(){
          int binary = decToBin(maxNum);
          int result = binToResult(binary,x ,y)<n ?  binToResult(binary,x ,y): -1;
       }
-      printf("%d",result);
+      printf("#%d %d",testCase,result);
       // return result;   
       return 0;
    }
