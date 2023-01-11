@@ -1,9 +1,6 @@
 {
     "files.associations": {
         "time.h": "c",
-        "iostream": "cpp",
-        "algorithm": "cpp",
-        "cmath": "cpp"
     }
 }
 // {

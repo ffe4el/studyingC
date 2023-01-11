@@ -3,10 +3,11 @@
 
 
 int main() {
-    int buf[4] = {0, }; // 숫자 입력받을 배열 크기 : 3 
+    int buf[] = {0, }; // 숫자 입력받을 배열 크기 : 3
+
     int size=0;
     while(size >= sizeof(buf)/sizeof(int)){
-    	// %1d 를 사용해 하나씩 읽음 
+    	// %1d 를 사용해 하나씩 읽음
         scanf("%1d", &buf[size]);
         size++;
     }
