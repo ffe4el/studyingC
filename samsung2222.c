@@ -13,11 +13,14 @@ void recursive(int num, int ten) {
     // printf("! %d", result);
     // printf("\n");
     for (int i = 0; i < 2; i++) {
+        if(arr[i]==0){
+            // result= -1;
+            recursive(num + arr[i+1] * ten, ten * 10);
+            continue;
+        }
         recursive(num + arr[i] * ten, ten * 10);
     }
-    if(num>n) {
-        result=-1;
-    }
+    
     
 }
 
