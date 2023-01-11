@@ -33,6 +33,9 @@ int main() {
         }
         result = 0;
         recursive(0, 1);
+        if(!result){
+            result = -1;
+        }
         printf("#%d %d\n", j+1,result);
     }
     return 0;
