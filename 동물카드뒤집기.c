@@ -6,7 +6,7 @@ int arrayAnimal[4][5];
 void initAnimalArray(); // 배열 값 초기화
 char * strAnimal[10];   // 동물 이름 리스트
 void initAnimalName();  // 동물 이름 초기화
-void suffleAnimal();    // 동물 이름을 카드지도위에 무작위 배치
+void shuffleAnimal();    // 동물 이름을 카드지도위에 무작위 배치
 int getEmptyPosition(); // 카드지도에서 빈공간을 찾아 위치 반환
 int conv_pos_x(int x);
 int conv_pos_y(int y);
@@ -17,10 +17,10 @@ int failCount=0;
 int foundAllAnimals();
 
 int main(){
+    srand(time(NULL)); //난수 초기화
     initAnimalArray();
     initAnimalName();   
-    suffleAnimal();
-    srand(time(NULL)); //난수 초기화
+    shuffleAnimal();
     while(1){
         int select1 = 0;
         int select2 = 0;
@@ -36,8 +36,9 @@ int main(){
         int select2_x=conv_pos_x(select2);
         int select2_y=conv_pos_y(select2);
         // 두 카드가 같은 동물이고 뒷면인 경우
-        if((checkAnimal[select1_x][select1_y]==0&&checkAnimal[select2_x][select2_y])
-        && (arrayAnimal[select1_x][select1_y]==arrayAnimal[select2_x][select2_y]))
+        if((checkAnimal[select1_x][select1_y]==0
+            &&checkAnimal[select2_x][select2_y]==0)
+            && (arrayAnimal[select1_x][select1_y]==arrayAnimal[select2_x][select2_y]))
         {
             printf("\n\n 빙고! : %s 발견\n\n", strAnimal[arrayAnimal[select1_x][select1_y]]);
             checkAnimal[select1_x][select1_y] = 1;
@@ -84,7 +85,7 @@ void initAnimalName(){
     strAnimal[9] = "호랑이";
 }
 
-void suffleAnimal(){
+void shuffleAnimal(){
     for(int i=0; i<10; i++){
         for(int j =0; j<2; j++){
             int pos = getEmptyPosition(); // 카드지도에서 빈공간을 찾아 위치 반환
@@ -128,6 +129,7 @@ void printAnimal(){
 }
 
 void printQuestion(){
+    printf("\n(문제)\n\n");
     int seq = 0;
     for(int i=0; i<4; i++){
         for(int j=0; j<5;j++){
