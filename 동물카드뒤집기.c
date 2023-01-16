@@ -19,6 +19,17 @@ int main(){
     initAnimalName();   
     suffleAnimal();
     srand(time(NULL)); //난수 초기화
+    while(1){
+        int select1 = 0;
+        int select2 = 0;
+        printAnimal();
+        printQuestion();
+        printf("\n뒤집을 카드 2장을 고르세요.(12 4) -> ");
+        scanf("%d %d", &select1, &select2);
+        if (select1==select2){  //같은 카드 선택시 무효처리
+            continue;   //반복문 시작으로 다시 돌아가기
+        }
+    }
     return 0 ;
 }
 
