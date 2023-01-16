@@ -13,6 +13,8 @@ int conv_pos_y(int y);
 void printAnimal();
 void printQuestion();
 int checkAnimal[4][5];
+int failCount=0;
+int foundAllAnimals();
 
 int main(){
     initAnimalArray();
@@ -28,6 +30,34 @@ int main(){
         scanf("%d %d", &select1, &select2);
         if (select1==select2){  //같은 카드 선택시 무효처리
             continue;   //반복문 시작으로 다시 돌아가기
+        }
+        int select1_x=conv_pos_x(select1);
+        int select1_y=conv_pos_y(select1);
+        int select2_x=conv_pos_x(select2);
+        int select2_y=conv_pos_y(select2);
+        // 두 카드가 같은 동물이고 뒷면인 경우
+        if((checkAnimal[select1_x][select1_y]==0&&checkAnimal[select2_x][select2_y])
+        && (arrayAnimal[select1_x][select1_y]==arrayAnimal[select2_x][select2_y]))
+        {
+            printf("\n\n 빙고! : %s 발견\n\n", strAnimal[arrayAnimal[select1_x][select1_y]]);
+            checkAnimal[select1_x][select1_y] = 1;
+            checkAnimal[select2_x][select2_y] = 1;
+        }
+        // 두 카드가 다른 동물이거나 앞면인 경우
+        else
+        {
+            printf("\n\n 땡!! (틀렸거나, 이미 뒤집힌 카드입니다)\n");
+            printf("%d : %s\n", select1, strAnimal[arrayAnimal[select1_x][select1_y]]);
+            printf("%d : %s\n", select2, strAnimal[arrayAnimal[select2_x][select2_y]]);
+            printf("\n\n");
+            failCount++;
+        }
+        // 모두 다 찾았을때
+        if (foundAllAnimals() == 1)
+        {
+            printf("\n\n 축하합니다 ! 모든 동물을 다 찾았네요 \n");
+            printf("지금까지 총 %d 번 실수하였습니다\n", failCount);
+            break;
         }
     }
     return 0 ;
@@ -99,7 +129,7 @@ void printAnimal(){
 
 void printQuestion(){
     int seq = 0;
-     for(int i=0; i<4; i++){
+    for(int i=0; i<4; i++){
         for(int j=0; j<5;j++){
             if(checkAnimal[i][j] != 0){     //카드가 앞면일때
                 printf("%8s", strAnimal[arrayAnimal[i][j]]);
@@ -109,7 +139,18 @@ void printQuestion(){
             }
             seq++;
         }
-        printf("\n")
-     }
+        printf("\n");
+    }
     
+}
+
+int foundAllAnimals(){
+    for(int i=0; i<4; i++){
+        for(int j=0; j<5;j++){
+            if(checkAnimal[i][j]==0){
+                return 0;   // 뒤집지 않은 카드가 있음
+            }
+        }
+    }
+    return 1;   // 모든 카드 뒤집음
 }
