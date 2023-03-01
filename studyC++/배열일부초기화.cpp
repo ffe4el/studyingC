@@ -21,7 +21,7 @@ int main(){
     {
         for (int j = 0; j < arr_col_len; j++)
         {
-            cout << setw(4) << arr[i][j];
+            cout << setw(4) << arr[i][j]; //배열에 자리수를 4자리수로 고정
         }
         cout << endl;
     }
