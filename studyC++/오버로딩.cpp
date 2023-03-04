@@ -1,45 +1,42 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 
-void SUM(int x, int y);
-void SUM(double x, double y);
-void SUM(string a, string b);
-void SUB(int x, int y);
-void SUB(double x, double y);
-void MULT(int x, int y);
-void MULT(double x, double y);
-void DIV(int x, int y);
-void DIV(double x, double y);
-void MOD(int x, int y);
+int SUM(int x, int y);
+double SUM(double x, double y);
+string SUM(string a, string b);
+int SUB(int x, int y);
+double SUB(double x, double y);
+int MULT(int x, int y);
+double MULT(double x, double y);
+int DIV(int x, int y);
+double DIV(double x, double y);
+int MOD(int x, int y);
 
 
 int main(){
     int type;
     cin >> type;
     if(type==1){
-        cout<<"정수"<<endl;
-        int a;
-        string k;
-        int b;
-        cin>>a;
-        cin>>k;
-        cin>>b;
-        if(k.compare("+")==0){
-        SUM(a,b);
+        int a,b ;
+        char k;
+        cin>>a>>k>>b;
+        if(k=='+'){
+            cout << SUM(a,b) << endl;
         }
-        else if(k.compare("-")==0){
-            SUB(a,b);
+        else if(k=='-'){
+            cout << SUB(a,b) << endl;
         }
-        else if(k.compare("*")==0){
-            MULT(a,b);
+        else if(k=='*'){
+            cout << MULT(a,b) << endl;
         }
-        else if(k.compare("/")==0){
-            DIV(a,b);
+        else if(k=='/'){
+            cout << DIV(a,b) << endl;
         }
-        else if(k.compare("%")==0){
-            MOD(a,b);
+        else if(k=='%'){
+            cout << MOD(a,b) << endl;
         }
         else{
             cout<<"incorrect"<<endl;
@@ -47,36 +44,31 @@ int main(){
     }
     else if(type==2){
         double a;
-        string k;
+        char k;
         double b;
-        cin>>a;
-        cin>>k;
-        cin>>b;
-        if(k.compare("+")==0){
-            SUM(a,b);
+        cin>>a>>k>>b;
+        if(k=='+'){
+            cout << fixed << setprecision(2) << SUM(a,b) << endl;
         }
-        else if(k.compare("-")==0){
-            SUB(a,b);
+        else if(k=='-'){
+            cout << fixed << setprecision(2) << SUB(a,b) << endl;
         }
-        else if(k.compare("*")==0){
-            MULT(a,b);
+        else if(k=='*'){
+            cout << fixed << setprecision(2) << MULT(a,b) << endl;
         }
-        else if(k.compare("/")==0){
-            DIV(a,b);
+        else if(k=='/'){
+            cout << fixed << setprecision(2) << DIV(a,b) << endl;
         }
         else {
             cout<<"incorrect"<<endl;
         }
     }
     else{
-        string a;
-        string b;
-        string k;
-        cin>>a;
-        cin>>k;
-        cin>>b;
-        if(k.compare("+")==0){
-            SUM(a,b);
+        string a, b;
+        char k;
+        cin>>a>>k>>b;
+        if(k=='+'){
+            cout<<SUM(a,b)<<endl;
         }
         else {
             cout<<"incorrect"<<endl;
@@ -86,51 +78,43 @@ int main(){
     return 0;
 }
 
-void SUM(int x, int y){
-    cout<<x+y<<endl;
+int SUM(int x, int y){
+    return x+y;
 }
 
-void SUM(double x, double y){
+double SUM(double x, double y){
     // 소수 2번째 숫자까지 출력
-    cout << fixed;
-    cout.precision(2);
-    cout<<x+y<<endl;
+    return x+y;
 }
 
-void SUM(string a, string b){
-    cout<<a+b<<endl;
+string SUM(string a, string b){
+    return a+b;
 }
 
-void SUB(int x, int y){
-    cout<<x-y<<endl;
+int SUB(int x, int y){
+    return x-y;
 }
 
-void SUB(double x, double y){
-    cout << fixed;
-    cout.precision(2);
-    cout<<x-y<<endl;
+double SUB(double x, double y){
+    return x-y;
 }
 
-void MULT(int x, int y){
-    cout<<x*y<<endl;
+int MULT(int x, int y){
+    return x*y;
 }
 
-void MULT(double x, double y){
-    cout << fixed;
-    cout.precision(2);
-    cout<<x*y<<endl;
+double MULT(double x, double y){
+    return x*y;
 }
 
-void DIV(int x, int y){
-    cout<<x/y<<endl;
+int DIV(int x, int y){
+    return x/y;
 }
 
-void DIV(double x, double y){
-    cout << fixed;
-    cout.precision(2);
-    cout<<x/y<<endl;
+double DIV(double x, double y){
+    return x/y;
 }
 
-void MOD(int x, int y){
-    cout<<x%y<<endl;
+int MOD(int x, int y){
+    return x%y;
 }
