@@ -21,7 +21,7 @@ int main(){
         swap(arr,i-1,j-1);
     }
     for(int a=0;a<n;a++){
-        cout<<arr[a];
+        cout<<arr[a]<<" ";
     }
     cout<<endl;
     return 0;
