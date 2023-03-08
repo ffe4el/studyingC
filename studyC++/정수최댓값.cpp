@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int big(int* arr, int n, int max_num);
+int big(int *arr, int n, int max_num);
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
     return 0;
 }
 
-int big(int* arr, int n, int max_num){
+int big(int *arr, int n, int max_num){
     max_num = arr[0];
     for(int i=1; i<n; i++){
         if (arr[i]>max_num){
