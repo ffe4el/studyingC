@@ -5,10 +5,10 @@ using namespace std;
 
 const int MAX_STACK_SIZE = 20;
 
-inline void error(char *message){
-    cout << message <<endl;
-    exit(1);
-}
+// inline void error(char *message){
+//     cout << message <<endl;
+//     exit(1);
+// }
 
 
 class ArrayStack
@@ -52,43 +52,54 @@ public :
     }
 };
 
-void checkMatching(string Str){
+void checkMatching(string Str, int cnt){
     ArrayStack stack;
     string ans = "OK";
     int a;
-    int lc = 1;
-    int bc = 2;
-    char ch;
+    // int lc = 1;
+    int bc = 0;
+    // char ch;
     a = Str.length();
-
-    if(Str == '[' || Str=='(' || Str=='{'){
-        stack.push(Str);
-    }
-
-    else if(Str == ']' || Str==')' || Str=='}'){
-        if(stack.isEmpty()){
-            cout << "비었음" << endl;
-
+    for(int i=0; i<a; i++){
+        if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){
+            stack.push(Str[i]);
         }
-        stack.pop();
+
+        else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){
+            if(stack.isEmpty()){
+                ans = "Error";
+            }
+            bc++;
+            stack.pop();
+        }
+    }
+    
+    if (stack.isEmpty()){
+        ans = "OK";
+    }
+    else{
+        ans = "Error";
     }
 
-    cout << a<<endl;
-    cout << ans <<", Line_count : "<<lc<<", bracket_count : "<<bc<<endl;
+    // cout << "괄호개수 : " <<a<<endl;
+    cout << ans <<", Line_count : "<< cnt <<", bracket_count : "<<bc<<endl;
 
 }
 
 int main(){
     string Str,temp;
+    int cnt;
     while(true){
         getline(cin,temp);
         if(temp=="EOF")break;
+        cnt ++;
         Str.append(temp);
-        Str.append("\n");
+        // Str.append("\n");
         cin.clear();
     }
-    cout << Str << endl;
-    checkMatching(Str);
+    // cout << Str << endl;
+    checkMatching(Str, cnt);
+    
 
     return 0;
 }
