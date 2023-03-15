@@ -8,7 +8,7 @@ void checkMatching(string Str, int cnt){
     bool quotes=false;
     int a;
     a = Str.length();
-    cout << a<<endl;
+    // cout << a<<endl;
     for(int i=0; i<a; i++){
         if(Str[i]=='\''){
             //그전에 \가 있었으면, 그 뒤에 '가 나오는걸 인정X
@@ -17,7 +17,7 @@ void checkMatching(string Str, int cnt){
                 continue;
             }
             if (quotes){    //작은따옴표닫기
-                qc++;
+                bc++;
                 cout<<"close"<<endl;
                 quotes=false;
             }

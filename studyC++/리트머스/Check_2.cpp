@@ -2,50 +2,55 @@
 #include <string>
 using namespace std;
 
-void checkMatching(string Str, int cnt){
+void checkMatching(string &Str, int cnt){
     string ans;
     int qc = 0;
+    int aa=0;
     bool quotes=false;
     int a;
     a = Str.length();
-    cout << a<<endl;
     for(int i=0; i<a; i++){
         if(Str[i]=='\''){
-            //그전에 \가 있었으면, 그 뒤에 '가 나오는걸 인정X
             if(i-1>=0 && Str[i-1]=='\\'){ 
-                cout<<"zzing"<<endl;
                 continue;
             }
             if (quotes){    //작은따옴표닫기
                 qc++;
-                cout<<"close"<<endl;
                 quotes=false;
             }
             else {  //작은따옴표 열기
-                cout<<"open"<<endl;
                 quotes = true;
             }
         }
     }
-
-    if (quotes){
-        ans = "Error";
+    
+    for(int i=0; i<a; i++){
+        if (Str[i]=='\''){
+            aa = 1;
+        }
+    }
+    if(aa==1){
+        if (quotes){
+            ans = "Error";
+        }
+        else{
+            ans="OK";
+        }
     }
     else{
-        ans="OK";
+        ans="Error";
     }
-
     cout << ans <<", Line_count : "<<cnt<<", quotes_count : "<<qc<<endl;
-
 }
 
 int main(){
     string Str,temp;
-    int cnt;
+    int cnt=0;
     while(true){
         getline(cin,temp);
         if(temp=="EOF")break;
         cnt++;
+        cout << "\\'";
         Str.append(temp);
         // Str.append("\n");
         // cin.clear();
