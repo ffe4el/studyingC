@@ -3,23 +3,26 @@
 using namespace std;
 
 void checkMatching(string Str, int cnt){
-    // ArrayStack stack;
     string ans;
-    int qc = 0;
+    int bc = 0;
     bool quotes=false;
     int a;
     a = Str.length();
+    cout << a<<endl;
     for(int i=0; i<a; i++){
-        if(Str[i]=='\"'){
-            if(i-1>0 && Str[i-1]=='\\'){
-                i++;
+        if(Str[i]=='\''){
+            //그전에 \가 있었으면, 그 뒤에 '가 나오는걸 인정X
+            if(i-1>=0 && Str[i-1]=='\\'){ 
+                cout<<"zzing"<<endl;
                 continue;
-            }   
+            }
             if (quotes){    //작은따옴표닫기
                 qc++;
+                cout<<"close"<<endl;
                 quotes=false;
             }
             else {  //작은따옴표 열기
+                cout<<"open"<<endl;
                 quotes = true;
             }
         }
@@ -31,12 +34,8 @@ void checkMatching(string Str, int cnt){
     else{
         ans="OK";
     }
-    // if(tt%2==1){ //작은따옴표가 홀수개면
-    //     ans = "Error";
-    // }
-    // qc = tt/2;
 
-    cout << ans <<", Line_count : "<<cnt<<", quotes_count : "<<qc<<endl;
+    cout << ans <<", Line_count : "<<cnt<<", bracket_count : "<<bc<<endl;
 
 }
 
@@ -49,9 +48,8 @@ int main(){
         cnt++;
         Str.append(temp);
         // Str.append("\n");
-        cin.clear();
+        // cin.clear();
     }
     checkMatching(Str, cnt);
-
     return 0;
 }
