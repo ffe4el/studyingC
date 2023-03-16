@@ -40,18 +40,23 @@ inline int precedence(char op){
     switch(op){
         case '(' : case ')' : return 0;
         case '+' : case '-' : return 1;
-        case '*' : case '/' : return 3;
+        case '*' : case '/' : return 2;
     }
     return -1;
 }
 
 void infix2Postfix(string s){
+    // char d[100];
+    string ans;
     for(int i=0; i<s.length(); i++){
+        //피연산자 출력
         if(s[i]>='0' && s[i]<='9'){
-            double d = stod(s[i],1);
-            printf("%.2f ", d);
-            
+            ans += s[i];
+            continue;
         }
+        //스택이 비어있는경우 or '('인경우
+
+
     }
 }
 
