@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <string>
 
 using namespace std;
@@ -44,18 +45,21 @@ inline int precedence(char op){
     return -1;
 }
 
-void infix2Postfix(){
-
+void infix2Postfix(string s){
+    for(int i=0; i<s.length(); i++){
+        if(s[i]>='0' && s[i]<='9'){
+            double d = stod(s[i],1);
+            printf("%.2f ", d);
+            
+        }
+    }
 }
 
 int main(){
-    string quest;
-    cin >> quest;
-    for(int i=0; i<quest.length(); i++){
-        cout << quest[i]<<endl;
-    }
-    
-    // infix2Postfix();
+    string s;
+    getline(cin, s);
+
+    infix2Postfix(s);
 
 
     return 0;
