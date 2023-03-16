@@ -7,7 +7,6 @@ inline void error(char *message){
     exit(1);
 }
 
-string temp;
 
 // 스택배열의 최대사이즈를 20으로 맞춰줌
 const int MAX_STACK_SIZE = 20;
