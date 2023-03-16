@@ -11,9 +11,10 @@ void checkMatching(string &Str, int cnt){
     a = Str.length();
     for(int i=0; i<a; i++){
         if(Str[i]=='\''){
-            if(i-1>=0 && Str[i-1]=='\\'){ 
-                continue;
-            }
+            // \'는 한개의 문자로 판별된다...(tlqkf!)
+            // if(i-1>=0 && Str[i-1]=='\\'){ 
+            //     continue;
+            // }
             if (quotes){    //작은따옴표닫기
                 qc++;
                 quotes=false;
