@@ -52,9 +52,6 @@ void checkMatching(string Str, int cnt){
             if (Str[i]=='\"'){
                 quotes=false;
             }
-            // else{
-            //     continue;
-            // }
         }
         else{ //큰따옴표가 닫혀있는 상태 => ()짝맞추기
             if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){

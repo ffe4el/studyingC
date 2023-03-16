@@ -68,12 +68,10 @@ void checkMatching(string Str, int cnt){
             else{ //큰따옴표가 닫혀있는 상태 => ()짝맞추기
                 if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){
                     stack.push(Str[i]);
-                    cout<<Str[i]<<endl;
                 }
                 else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){
                     if(stack.isEmpty()){
-                        ans = "Error";
-                        continue;
+                    ans = "Error";
                     }
                     else{
                         int prev = stack.peek();
@@ -88,7 +86,6 @@ void checkMatching(string Str, int cnt){
                 else if(Str[i]=='\"'){
                     quotes= true;
                 }
-                
                 else if(Str[i]=='/'){
                     if(i-1>=0 && Str[i-1]=='/'){
                         j=1;
@@ -101,6 +98,12 @@ void checkMatching(string Str, int cnt){
                 }
             }
         }
+            
+    
+        // if(Str[i]=='\n'){
+        //     continue;
+        // }
+
     }
 
     if (stack.isEmpty()){
