@@ -63,16 +63,16 @@ void checkMatching(string Str, int cnt){
             else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){
                 if(stack.isEmpty()){
                 ans = "Error";
-            }
-            else{
-                int prev = stack.peek();
-                if((Str[i] == ']'&& prev !='[')||(Str[i] == ')'&& prev !='(')||(Str[i] == '}'&& prev !='{')){
-                    ans = "Error";
-                    continue;
                 }
-                bc++;
-                stack.pop();
-            }
+                else{
+                    int prev = stack.peek();
+                    if((Str[i] == ']'&& prev !='[')||(Str[i] == ')'&& prev !='(')||(Str[i] == '}'&& prev !='{')){
+                        ans = "Error";
+                        continue;
+                    }
+                    bc++;
+                    stack.pop();
+                }
             }
             else if(Str[i]=='\"'){
                 quotes= true;
