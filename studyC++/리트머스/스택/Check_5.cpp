@@ -92,6 +92,7 @@ int main(){
     ArrayStack stack;
     string ans;
     string input;
+    double a;
     // cout << s[2] <<endl;
     getline(cin, input); // 입력 받기
     string s = ""; // 추출한 숫자를 저장할 문자열
@@ -106,7 +107,11 @@ int main(){
     for(int i=0; i<s.length(); i++){
         //피연산자 출력
         if(s[i]>='0' && s[i]<='9'){
-            ans += s[i];
+            // char s[i];
+            // a = strtof(s[i]);
+            // ans += s[i];
+            cout <<s[i] << " ";
+
             continue;
         }
         //스택이 비어있는경우 or '('인경우 push
