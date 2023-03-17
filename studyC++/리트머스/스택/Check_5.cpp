@@ -46,6 +46,7 @@ inline int precedence(char op){
 }
 
 void infix2Postfix(string s){
+    ArrayStack stack;
     // char d[100];
     string ans;
     for(int i=0; i<s.length(); i++){
@@ -54,8 +55,24 @@ void infix2Postfix(string s){
             ans += s[i];
             continue;
         }
-        //스택이 비어있는경우 or '('인경우
-
+        //스택이 비어있는경우 or '('인경우 push
+        if(stack.isEmpty()|| s[i]=='('){
+            stack.push(s[i]);
+            continue;
+        }
+        //')'경우 '('만날때까지 출력
+        if(s[i]==')'){
+            while(stack.peek() != '('){
+                ans += stack.peek();
+                stack.pop();
+            }
+            stack.pop(); //'('는 삭제  
+            continue;
+        }
+        //top보다 우선순위 크면 Push
+        if(precedence(stack.peek()) < precedence(s[i])){
+            stack.push(s[i]);
+        }
 
     }
 }
