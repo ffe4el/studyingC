@@ -68,7 +68,7 @@ void checkMatching(string Str, int cnt){
             else{ //큰따옴표가 닫혀있는 상태 => ()짝맞추기
                 if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){
                     stack.push(Str[i]);
-                    cout<<Str[i]<<endl;
+                    // cout<<Str[i]<<endl;
                 }
                 else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){
                     if(stack.isEmpty()){

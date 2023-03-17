@@ -6,7 +6,8 @@
         "ostream": "cpp",
         "iosfwd": "cpp",
         "string": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "istream": "cpp"
     },
     "code-runner.executorMap": {
         "javascript": "node",
