@@ -52,17 +52,16 @@ void infix2Postfix(string s){
         //피연산자 출력
         if(s[i]>='0' && s[i]<='9'){
             if(i<=s.length()-2){
-                while(s[i]!=' '){
+                while(s[i]!=' '){   //띠어쓰기를 만날때까지
                     ans += s[i];
                     i++;
+                    continue;
                 }
             }
             else if(i==s.length()-1){
                 ans += s[i];
             }
-            
             // ans += s[i];
-            
         }
         //스택이 비어있는경우 or '('인경우 push
         else if(stack.isEmpty()|| s[i]=='('){
@@ -71,25 +70,42 @@ void infix2Postfix(string s){
         }
         //')'경우 '('만날때까지 출력
         else if(s[i]==')'){
-            while(stack.peek() != '('){
+            while(!stack.isEmpty()){
+                if(stack.peek()=='('){
+                    stack.pop();
+                    break;
+                }
                 ans += stack.peek();
                 stack.pop();
             }
-            stack.pop(); //'('는 삭제  
-            continue;
+            // while(stack.peek() != '('){
+            //     ans += stack.peek();
+            //     stack.pop();
+            // }
+            // stack.pop(); //'('는 삭제  
+            // continue;
         }
-        //top보다 우선순위 크면 Push
-        if(precedence(stack.peek()) <= precedence(s[i])){
-            stack.push(s[i]);
-        }
-        //top보다 우선순위 작거나 같으면 pop 후 반복
-        else{
-            while(!stack.isEmpty() && precedence(stack.peek())>= precedence(s[i])){
+
+        else{   //기호 만났을때
+            while(!stack.isEmpty() && precedence(stack.peek()) >= precedence(s[i])){
                 ans += stack.peek();
                 stack.pop();
             }
-            stack.push(s[i]);
+            stack.push(s[i]); //현재 연산자 Push
         }
+
+        // //top보다 우선순위 크면 Push
+        // if(precedence(stack.peek()) <= precedence(s[i])){
+        //     stack.push(s[i]);
+        // }
+        // //top보다 우선순위 작거나 같으면 pop 후 반복
+        // else{
+        //     while(!stack.isEmpty() && precedence(stack.peek())>= precedence(s[i])){
+        //         ans += stack.peek();
+        //         stack.pop();
+        //     }
+        //     stack.push(s[i]);
+        // }
     }
     while(!stack.isEmpty()){
         ans += stack.peek();
