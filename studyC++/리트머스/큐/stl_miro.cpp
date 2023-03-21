@@ -1,6 +1,53 @@
+// #include "Location2D.h"
 #include <iostream>
-using namespace std; 
+#include <stack>
+using namespace std;
+const int MAZE_SIZE=6;  //미로맵 크기 고정
+char map[MAZE_SIZE][MAZE_SIZE] = {  //미로맵 데이터
+    {'1','1','1','1','1','1'},
+    {'e','0','1','0','0','1'},
+    {'1','0','0','0','1','1'},
+    {'1','0','1','0','1','1'},
+    {'1','0','1','0','0','x'},
+    {'1','1','1','1','1','1'},
+};
 
+//(r,c)가 갈 수 있는 위치인지를 검사
+//(r,c)가 배열 안에 있고, 값이 갈 수 있는 위치 '0'이거나 출구 'x'이어야함
+bool isValidLoc(int r, int c){
+    if(r<0||c<0||r>=MAZE_SIZE|| c>=MAZE_SIZE) return false;
+    else return map[r][c] =='0' || map[r][c]=='x'; //bool타입 반환
+}
+
+//미로탐색 프로그램 주함수
+void main(){
+    stack<Location2D> locStack; //위치 스택 객체 생성
+    Location2D entry(1,0);  //입구 객체
+    locStack.push(entry);
+
+    while(!locStack.empty()){   //스택이 비어있지 않는 동안
+        Location2D here = locStack.top();   //스택에 상단객체 복사
+        locStack.pop(); //스택에 상단 객체 삭제
+
+        int r=here.row; 
+        int c = here.col;
+        printf("(%d, %d)", r,c);    //현재위치 화면 출력
+        if(map[r][c] =='x'){    // 출구를 만났으면 -> 탐색 성공
+            printf(" 미로 탐색 성공\n");
+            return;
+        }
+        else {      //출구가 아니면
+            map[r][c] ='.'; //현재 위치를 지나옴처리
+            if(isValidLoc(r-1,c)) locStack.push(Location2D(r-1,c));
+            if(isValidLoc(r+1,c)) locStack.push(Location2D(r+1,c));
+            if(isValidLoc(r,c-1)) locStack.push(Location2D(r,c-1));
+            if(isValidLoc(r,c+1)) locStack.push(Location2D(r,c+1));
+        }
+    }
+}
+
+
+// 얘는 그냥 없어도 될듯...? 아닌가..?
 struct Location2D{
     int row;    //현재위치의 행번호
     int col;    // 현재위치의 열번호
