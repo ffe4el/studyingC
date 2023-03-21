@@ -7,7 +7,6 @@ class ArrayStack
 {
     int top;    //요소 개수
     int data[MAX_STACK_SIZE]; //요소의 배열
-
 public :
     ArrayStack(){top = -1;} //스택의 생성자
     //반환자가 bool 타입이기 때문에 return top==-1일때 True를 반환하고, top!=-1이면 False를 반환한다.
@@ -59,7 +58,7 @@ ArrayStack infix2Postfix(FILE *fp=stdin){
             stt.push(val);
         }
         else if(c=='(') st.push(c);
-        
+
         else if(c==')'){
             while(!st.isEmpty()){
                 op = st.pop();
