@@ -13,21 +13,18 @@ int main(){
     for(int i=1; i<=n; i++){
         q.push(i);
     }
-    while(!q.empty()){
+    // cout << q.display() <<endl;
+    cout <<"<";
+    for(int j=0; j<n-1; j++){
         for(int i=0; i<k-1; i++){
             q.push(q.front());
             q.pop();
         }
-        
-        ans += q.front();
+        cout << q.front() << ", ";
         q.pop();
-        if(q.){ // 애는 어떻게 하지...?
-            ans += ", ";
-        }
-        
-        
     }
-
+    cout << q.front() <<">"<<endl;
+    // cout << "<" << ans << ">" << endl;
     return 0;
 }
 
@@ -41,7 +38,5 @@ int main(){
 //     for(int i=1; i<=n; i++){ //배열에 n까지의 수 넣기 
 //         arr[i] = i;
 //     }
-
-
-    return 0;
-}
+//     return 0;
+// }

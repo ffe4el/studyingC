@@ -8,7 +8,8 @@
         "string": "cpp",
         "ios": "cpp",
         "istream": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "queue": "cpp"
     },
     "code-runner.executorMap": {
         "javascript": "node",
