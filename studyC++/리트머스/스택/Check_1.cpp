@@ -61,11 +61,11 @@ void checkMatching(string Str, int cnt){
     // char ch;
     a = Str.length();
     for(int i=0; i<a; i++){
-        if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){
+        if(Str[i] == '[' || Str[i] =='(' || Str[i] =='{'){ //열린 괄호일때 push
             stack.push(Str[i]);
         }
  
-        else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){
+        else if(Str[i] == ']' || Str[i]==')' || Str[i]=='}'){ //닫힌괄호 일때
             if(stack.isEmpty()){
                 ans = "Error";
             }

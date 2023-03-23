@@ -41,7 +41,7 @@ void checkMatching(string Str, int cnt){
     int j = 0; //주석진행됐으면 1,2 주석진행 안됐으면 0
     bool quotes = false;
     int a;
-    int aa;
+
     
     a = Str.length();
     for(int i=0; i<a; i++){

@@ -26,19 +26,19 @@ void checkMatching(string &Str, int cnt){
     }
     
     for(int i=0; i<a; i++){
-        if (Str[i]=='\''){
+        if (Str[i]=='\''){  //만약 작은따옴표가 한개라도 있었으면 aa=1
             aa = 1;
         }
     }
-    if(aa==1){
-        if (quotes){
+    if(aa==1){  //만약 aa가 1일때
+        if (quotes){    //따옴표가 열려있으면 에러
             ans = "Error";
         }
-        else{
+        else{   //닫혀있으면 성공
             ans="OK";
         }
     }
-    else{
+    else{   //그 외 작은 따옴표가 없었으면 에러
         ans="Error";
     }
     cout << ans <<", Line_count : "<<cnt<<", quotes_count : "<<qc<<endl;
