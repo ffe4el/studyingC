@@ -44,7 +44,7 @@ int main(){
         printf("(%d, %d)", r,c);    //현재위치 화면 출력
         if(map[r][c] =='x'){    // 출구를 만났으면 -> 탐색 성공
             printf(" 미로 탐색 성공\n");
-            return;
+            return 0;
         }
         else {      //출구가 아니면
             map[r][c] ='.'; //현재 위치를 지나옴처리
