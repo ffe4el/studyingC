@@ -22,44 +22,64 @@ int main(){
         q.push(a);
     }
 
-
+    int num=1;
     //오름차순
     if(type =='a'){
-        int num=1;
-        while(num < 5){
-            while(q.front()!=num){
-                s.push(q.front());
-                q.pop();
-            }
+        while(!q.empty()){
             if(q.front()==num){
                 pq.push(q.front());
-            }
-            num++;
-            if(s.top()==num){
-                pq.push(s.top());
-                s.pop();
+                q.pop();
                 num++;
+
+                if(!s.empty()){
+                    while(s.top()==num){
+                        pq.push(s.top());
+                        s.pop();
+                        num++;
+                    }
+                }
+            }
+            else{
+                s.push(q.front());
             }
         }
+        if(num == n+1){
+            cout << "Yes" <<endl;
+        }
+        else{
+            cout << "No" <<endl;
+        }
     }
-
-    //내림차순
-    else if(type = 'd'){
-
-    }
-
     
-    // while(q.front()!=1){
-    //     int num;
-    //     num = q.front();
-    //     s.push(num);
-    //     q.pop();
-    // }
 
-    // if(stack.)
+    int number=n;
+    //내림차순
+    if(type == 'd'){
+        while(!q.empty()){
+            if(q.front()==number){
+                pq.push(q.front());
+                q.pop();
+                number--;
 
-
-
+                if(!s.empty()){
+                    while(s.top()==number){
+                        pq.push(s.top());
+                        s.pop();
+                        number--;
+                    }
+                }
+            }
+            else{
+                s.push(q.front());
+            }
+        }
+        if(number == 0){
+            cout << "Yes" <<endl;
+        }
+        else{
+            cout << "No" <<endl;
+        }
+    }
 
     return 0;
 }
