@@ -16,15 +16,15 @@ int main(){
     char type; //오름차순인지 내림차순인지
     cin >> type;
     
-    int a;
+    int input;
     for(int i=0; i<n; i++){//순서대로 입력받기
-        cin >> a;
-        q.push(a);
+        cin >> input;
+        q.push(input);
     }
 
-    int num=1;
     //오름차순
     if(type =='a'){
+        int num=1;
         while(!q.empty()){
             if(q.front()==num){
                 pq.push(q.front());
@@ -41,6 +41,10 @@ int main(){
             }
             else{
                 s.push(q.front());
+                cout<<"스택에 넣는중";
+                cout << q.front();
+                q.pop();
+                
             }
         }
         if(num == n+1){
@@ -52,9 +56,9 @@ int main(){
     }
     
 
-    int number=n;
     //내림차순
-    if(type == 'd'){
+    else if(type == 'd'){
+        int number=n;
         while(!q.empty()){
             if(q.front()==number){
                 pq.push(q.front());
@@ -71,6 +75,9 @@ int main(){
             }
             else{
                 s.push(q.front());
+                cout<<"스택에 넣는중";
+                cout << q.front();
+                q.pop();
             }
         }
         if(number == 0){
