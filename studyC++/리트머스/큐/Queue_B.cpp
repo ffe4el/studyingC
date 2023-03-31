@@ -29,6 +29,7 @@ int main(){
             if(q.front()==num){
                 pq.push(q.front());
                 q.pop();
+                cout << q.front();
                 num++;
 
                 if(!s.empty()){
