@@ -26,10 +26,10 @@ int main(){
     if(type =='a'){
         int num=1;
         while(!q.empty()){
-            if(q.front()==num){
+            if(q.front()==num && !q.empty()){
                 pq.push(q.front());
                 q.pop();
-                cout << q.front();
+                // cout << q.front();
                 num++;
 
                 if(!s.empty()){
@@ -41,11 +41,12 @@ int main(){
                 }
             }
             else{
-                s.push(q.front());
-                cout<<"스택에 넣는중";
-                cout << q.front();
-                q.pop();
-                
+                if(!q.empty()){
+                    s.push(q.front());
+                    // cout<<"스택에 넣는중";
+                    // cout << q.front();
+                    q.pop();
+                }
             }
         }
         if(num == n+1){
@@ -61,7 +62,7 @@ int main(){
     else if(type == 'd'){
         int number=n;
         while(!q.empty()){
-            if(q.front()==number){
+            if(q.front()==number && !q.empty()){
                 pq.push(q.front());
                 q.pop();
                 number--;
@@ -75,11 +76,13 @@ int main(){
                 }
             }
             else{
-                s.push(q.front());
-                cout<<"스택에 넣는중";
-                cout << q.front();
-                q.pop();
+                if(!q.empty()){
+                    s.push(q.front());
+                    q.pop();
+                }
             }
+
+            
         }
         if(number == 0){
             cout << "Yes" <<endl;
