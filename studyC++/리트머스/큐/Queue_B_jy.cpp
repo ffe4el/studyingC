@@ -114,59 +114,62 @@ public:
 };
  
 int main() {
-    CircularDeque input, output;
-    ArrayStack stack;
-    int cnt;
+    CircularQueue q, pq; //입력큐와 출력큐
+    ArrayStack s;
+    int n;
     int num;
-    char how;
+    char type;
  
-    cin >> cnt >> how; // 조건 입력 받기
-    for (int i = 0; i < cnt; i++) { // 일단 큐로 넣기
+    cin >> n >> type; //입력 받을 숫자
+    for (int i = 0; i < n; i++) {  //입력큐에 넣기
         cin >> num;
-        input.enqueue(num);
+        q.enqueue(num);
     }
-    if (how == 'd') { // 내림차순일때
-        while (!input.isEmpty()) {
-            int k = input.dequeue();
-            if (k == cnt) {
-                output.enqueue(k);
-                cnt--;
+
+    // 오름차순
+    if (type == 'a') { 
+        int a_n = 1;  //오름차순이니 a_n을 1로 설정
+        while (!q.isEmpty()) {  //입력큐가 비어있지 않을동안
+            int k = q.dequeue(); //입력큐에서 뺀 수를 k로 설정
+            if (k == a_n) { //k와 a_n이 같다면
+                pq.enqueue(k);  //k를 출력큐에 바로 넣기
+                a_n++;  //k를 넣었으니 비교할 a_n숫자 1 늘리기
  
-                if (!stack.isEmpty()) {
-                    while (cnt == stack.peek()) {
-                        output.enqueue(stack.pop());
-                        cnt--;
+                if (!s.isEmpty()) {
+                    while (a_n == s.peek()) { //스택의 peek이 n과 같을때 동안
+                        pq.enqueue(s.pop()); //스택을 pop하고 출력큐에 넣기
+                        a_n++; //k를 넣었으니 비교할 a_n숫자 1 늘리기
                     }
                 }
             }
-            else {
-                stack.push(k);
+            else {  //k와 a_n이 다르다면 k는 대기조(스택)에 넣기
+                s.push(k);
             }
         }
-        if (cnt == 0) cout << "Yes" << endl;
+        if (a_n == n + 1) cout << "Yes" << endl; //n이 n+1까지 늘어났으면 성공
         else cout << "No" << endl;
     }
+
+    // 내림차순
+    else if (type == 'd') { 
+        while (!q.isEmpty()) {  //입력큐가 비어있지 않을동안
+            int k = q.dequeue();  //입력큐에서 뺀 수를 k로 설정
+            if (k == n) {   //k와 n이 같다면
+                pq.enqueue(k);  //k를 출력큐에 바로 넣기
+                n--; //k를 넣었으니 비교할 n숫자 1 줄이기
  
-    else if (how == 'a') { // 오름차순일때
-        int a_cnt = 1;
-        while (!input.isEmpty()) {
-            int k = input.dequeue();
-            if (k == a_cnt) {
-                output.enqueue(k);
-                a_cnt++;
- 
-                if (!stack.isEmpty()) {
-                    while (a_cnt == stack.peek()) {
-                        output.enqueue(stack.pop());
-                        a_cnt++;
+                if (!s.isEmpty()) { 
+                    while (n == s.peek()) { //스택의 peek이 n과 같을때 동안
+                        pq.enqueue(s.pop()); //스택을 pop하고 출력큐에 넣기
+                        n--; //비교할 n숫자 1줄이기
                     }
                 }
             }
-            else {
-                stack.push(k);
+            else {  //k와 n이 다르다면 k는 스택에 넣기
+                s.push(k);
             }
         }
-        if (a_cnt == cnt + 1) cout << "Yes" << endl;
+        if (n == 0) cout << "Yes" << endl;  //n이 0까지 줄어들었으면 성공
         else cout << "No" << endl;
     }
 }
