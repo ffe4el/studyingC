@@ -35,17 +35,18 @@ int main(){
             ma.push_back(name);
         }
 
-        if(!ma.empty() && !fe.empty()){
+        if(!ma.empty() && !fe.empty()){ //여자큐, 남자큐 모두 비지 않았으면
             him = ma.front();
-            ma.pop_front();
+            ma.pop_front(); //남자큐 맨앞분 빼고
             her = fe.front();
-            fe.pop_front();
-            ans++;
+            fe.pop_front(); //여자큐 맨앞분 빼고
+            ans++;  //현재 매치된 미팅 수 ++
             cout << "Matched : "<<him<<" "<<her<<endl; 
         }
         
     }
 
+    //반복문을 돌고 각 성별 큐에 남은 사람들 수 세기
     int men=0;
     int women=0;
     while(!ma.empty()){
@@ -57,6 +58,7 @@ int main(){
         women++;
     }
 
+    //매치된 커플 수랑 남은 남자, 남은 여자 수 출력하기
     cout << ans <<" "<< men <<" "<< women << endl;
 
     return 0;
