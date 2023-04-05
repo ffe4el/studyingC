@@ -4,19 +4,21 @@
 using namespace std;
 
 int main(){
-    queue <pair<int,int>> pq; //pair queue
-    priority_queue <int> q; //우선순위 큐, 내림차순 정렬해야 pop할때 높은게 빠져나옴.
     int tc;
     cin >>tc;
     int cnt=0;
-    
-    
-    for(int i=0; i<tc; i++){
-        int n;
-        int m;
-        int im;
-        
+    int n;
+    int m;
+    int im;
+
+
+    for(int i=0; i<tc; i++){//test_case시작  
+        cnt = 0;    //tc마다 cnt 초기화
         cin >> n >> m;
+
+        //queue tc마다 초기화
+        queue <pair<int,int>> pq; //pair queue
+        priority_queue <int> q; //우선순위 큐, 내림차순 정렬해야 pop할때 높은게 빠져나옴.
         
         for(int j=0; j<n; j++){
             cin >> im;

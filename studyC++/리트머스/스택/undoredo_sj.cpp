@@ -1,4 +1,3 @@
-
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
@@ -18,9 +17,13 @@ public:
       bottom = 0;
    }
    bool isEmpty() { return top == bottom - 1; }
+   int size()
+   {
+      return top - bottom + 1;
+   }
    void push(char al)
    {
-      if (top+1 >= MAX_STACK_SIZE)
+      if (size() >= MAX_STACK_SIZE)
       {
          top++;
          bottom++;
@@ -43,10 +46,7 @@ public:
       }
       
    }
-   int size()
-   {
-      return top - bottom + 1;
-   }
+   
 };
 int main()
 {
@@ -70,7 +70,8 @@ int main()
             cout << "ERROR " << endl;
             return 0;
          }
-         redo.push(undo.pop());
+         else
+            redo.push(undo.pop());
 
       }
 
@@ -81,7 +82,8 @@ int main()
             cout << "ERROR " << endl;
             return 0;
          }
-         undo.push(redo.pop());
+         else
+            undo.push(redo.pop());
          
       }
    } while (getc(stdin) == ' '); //엔터를 입력하면 입력 반복문 탈출
@@ -100,6 +102,6 @@ int main()
       cout << redo.pop() << " ";
    cout<<endl;
 
-    return 0;
+   return 0;
 
 }
