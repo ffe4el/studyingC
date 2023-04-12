@@ -30,7 +30,7 @@ public :
         // 임시 포인터 변수 p를 선언하고 top을 복사한 후 루프가 반복될 때 마다 p가 연결 리스트의 다음 노드를 가리키도록 해서 
         // 모든 노드를 한 번 씩 방문할 수 있도록 함. 
         for(Node *p = top; p!=NULL; p=p->getLink())
-            // p->display(); ? 이거 왜 오류?
+            p->display(); ? 이거 왜 오류?
         printf( "\n");
     }
 

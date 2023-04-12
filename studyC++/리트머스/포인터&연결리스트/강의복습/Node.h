@@ -6,7 +6,9 @@ public:
     Node(int id=0, char* name="", char* dept="") //생성자. 멤버 초기화 리스트를 사용하여 부모클래스 Student의 생성자를 선택하여
     : Student(id, name, dept){link = NULL;} //호출한것에 유의할것. link는 반드시 NULLfh chrlghk godigka.
     ~Node(void){} //소멸자.
+
     Node* getLink(){ return link; }
+
     void setLink(Node *p) { link = p;}
 
 
