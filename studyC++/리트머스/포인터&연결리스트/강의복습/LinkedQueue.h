@@ -4,6 +4,7 @@ class LinkedQueue{
     Node* rear; //가장 마지막에 삽입된 노드의 포인터
     
 public:
+    //생성자에서 반드시 프론트와 리어를 널로 초기화해야함. -> 멤버 초기화 리스트 사용.
     LinkedQueue():front(NULL), rear(NULL){ }
     ~LinkedQueue() {while(!isEmpty()) delete dequeue();}
     bool isEmpty(){ return front == NULL;}
