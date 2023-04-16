@@ -1,5 +1,6 @@
 //배열을 이용한 리스트 구현 
 #include <cstdio>
+#include <iostream>
 #define MAX_LIST_SIZE 100
 
 inline void error(char *message){
