@@ -46,15 +46,13 @@ int main()
 
    do {
       cin >> al;
-      if (al >='a' && al <= 'z')
-      {
+      if (al >='a' && al <= 'z'){
          undo.push(al);
          while (!redo.isEmpty())
             redo.pop();
       }
 
-      else if (al == 'U')
-      {
+      else if (al == 'U'){
          if (undo.isEmpty())
          {
             cout << "ERROR " << endl;
@@ -65,8 +63,7 @@ int main()
 
       }
 
-      else if (al == 'R')
-      {
+      else if (al == 'R'){
          if (redo.isEmpty())
          {
             cout << "ERROR " << endl;
@@ -80,8 +77,7 @@ int main()
 
    if (undo.size() == 0)
       cout << "EMPTY ";
-   while (undo.size() > 0)
-   {
+   while (undo.size() > 0){
       cout << undo.pop() << " ";
    }
    cout << endl;
