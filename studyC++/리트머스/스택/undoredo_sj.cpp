@@ -11,42 +11,32 @@ protected:
    int bottom;
    char data[MAX_STACK_SIZE];
 public:
-   CircularStack()
-   {
+   CircularStack(){
       top = -1;
       bottom = 0;
    }
    bool isEmpty() { return top == bottom - 1; }
-   int size()
-   {
+   int size(){
       return top - bottom + 1;
    }
-   void push(char al)
-   {
-      if (size() >= MAX_STACK_SIZE)
-      {
+   void push(char al){
+      if (size() >= MAX_STACK_SIZE){
          top++;
          bottom++;
          data[top] = al;
       }
-      else
-      {
+      else{
          top++;
          data[top] = al;
       }
-
    }
-   char pop()
-   {
-      if (!isEmpty())
-      {
+   char pop(){
+      if (!isEmpty()){
          char al = data[top];
          top--;
          return al;
       }
-      
    }
-   
 };
 int main()
 {
