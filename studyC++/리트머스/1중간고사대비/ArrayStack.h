@@ -40,9 +40,9 @@ public:
         }
     }
 
-    int size(){
-        return sizeof(data)/sizeof(int);
-    }
+    // int size(){
+    //     return sizeof(data)/sizeof(int);
+    // }
 
     
 
