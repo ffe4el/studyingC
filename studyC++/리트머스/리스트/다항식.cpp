@@ -1,12 +1,11 @@
 #include <iostream>
 #include <cstdio>
-#include <list>
 
 using namespace std;
 
 int main(){
     int a,b;
-    int cnt;
+    int cnt=0;
 
     int f;
     //첫번째 식 항의 개수 입력받기
