@@ -111,7 +111,7 @@ public :
     void Display(FILE *fp = stdout){
         int i=0;
         for(Node *p = getHead(); p!=NULL; p=p->getLink(), i++){
-            fprintf(stderr, "%d: ", i);
+            fprintf(stderr, "%3d: ", i);
             p -> display(fp);
         }
         printf("EOF\n");
@@ -224,7 +224,7 @@ int main(){
                 if(getchar() == '\n'){
                     continue;
                 }
-                break;
+                break; 
             }
             case 'q': break;
         }
