@@ -214,7 +214,6 @@ int main(){
                 if(getchar() == '\n'){
                     continue;
                 }
-                break;
             } // 한 행 삭제 
             case 'i': editor.InsertLine(); break; // 한 행 삽입 
             case 'r': editor.ReplaceLine(); break; // 한 행 변경 
@@ -224,7 +223,6 @@ int main(){
                 if(getchar() == '\n'){
                     continue;
                 }
-                break;
             }
             case 'q': break;
         }
