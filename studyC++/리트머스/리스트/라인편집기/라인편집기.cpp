@@ -73,6 +73,13 @@ public :
         return NULL;
     }
 
+    int findNum(char *str){
+        int i=0;
+        for(Node *p=getHead(); p!=NULL; p=p->getLink(), i++)
+            if(p->hasData(str)) return i;
+        return -1;
+    }
+
     void replace(int pos, Node *n){
         Node* prev = getEntry(pos-1);
         if(prev != NULL){
@@ -104,14 +111,15 @@ public :
             fprintf(stderr, "%3d: ", i);
             p -> display(fp);
         }
+        printf("EOF\n");
     }
 
     void InsertLine(){
         int position;
         char line[MAX_CHAR_PER_LINE];
-        printf(" 입력행 번호 : ");
+        // printf(" 입력행 번호 : ");
         scanf("%d", &position);
-        printf(" 입력행 내용 : ");
+        // printf(" 입력행 내용 : ");
         fflush(stdin);
         fgets(line, MAX_CHAR_PER_LINE, stdin);
 
@@ -119,7 +127,7 @@ public :
     }
 
     void DeleteLine(){
-        printf(" 삭제행 번호 : ");
+        // printf(" 삭제행 번호 : ");
         int position;
         scanf("%d", &position);
 
@@ -129,9 +137,9 @@ public :
     void ReplaceLine(){
         int position;
         char line[MAX_CHAR_PER_LINE];
-        printf(" 변경행 번호 : ");
+        // printf(" 변경행 번호 : ");
         scanf("%d", &position);
-        printf(" 변경행 내용 : ");
+        // printf(" 변경행 내용 : ");
         fflush(stdin);
         fgets(line, MAX_CHAR_PER_LINE, stdin);
 
@@ -162,6 +170,12 @@ public :
         fflush(stdin);
         fgets(line, MAX_CHAR_PER_LINE, stdin);
 
+        char cline[MAX_CHAR_PER_LINE];
+        fflush(stdin);
+        fgets(cline, MAX_CHAR_PER_LINE, stdin);
+
+        int p = findNum(line);
+        replace(p, new Node(cline));
     }
 };
 
@@ -173,7 +187,7 @@ int main(){
     LineEditor editor;
     char command;
     do{
-        Usage();
+        // Usage();
         command = getchar();
         switch(command){
             case 'd': editor.DeleteLine(); break; // 한 행 삭제 
