@@ -10,12 +10,12 @@ class Line{
 public:
     Line(const char *line=""){strcpy(data, line);}
     void read(FILE *fp = stdin){fgets(data,MAX_CHAR_PER_LINE,fp);}
-    void display(FILE *fp = stdout){fprintf(fp,"%s",data);}
+    void display(FILE *fp = stdout){printf("%s",data);}
     bool hasData(char* str){return strcmp(str,data)==0;}
 };
 
 inline void error(char *str){
-    fprintf(stderr, "%s\n", str);
+    printf("%s\n", str);
     exit(1);
 };
 
@@ -111,7 +111,7 @@ public :
     void Display(FILE *fp = stdout){
         int i=0;
         for(Node *p = getHead(); p!=NULL; p=p->getLink(), i++){
-            fprintf(stderr, "%d: ", i);
+            printf("%d: ", i);
             p -> display(fp);
         }
         printf("EOF\n");
