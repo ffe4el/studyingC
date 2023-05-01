@@ -182,12 +182,6 @@ public :
         fgets(line, MAX_CHAR_PER_LINE, stdin);
         fgets(cline, MAX_CHAR_PER_LINE, stdin);
 
-        
-        // fflush(stdin);
-        // while (getchar() != '\n')
-        //     continue;
-        
-
         int a = findNum(line);
         replace(a, new Node(cline));
     }
@@ -204,10 +198,6 @@ int main(){
         // Usage();
         // cout << "\n";
         command = getchar();
-        // cin >> command;
-        // if(getchar() == '\n'){
-        //     continue;
-        // }
         switch(command){
             case 'd': {
                 editor.DeleteLine(); 
@@ -228,9 +218,6 @@ int main(){
         }
         
         //fflush(stdin); //입력버퍼 지우기
-        // while (command != '\n')
-        //     continue;
-        
     }while(command != 'q');
     return 0;
 }
