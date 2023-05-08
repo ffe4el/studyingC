@@ -120,11 +120,9 @@ public :
     void InsertLine(){
         int position;
         char line[MAX_CHAR_PER_LINE];
-        // printf(" 입력행 번호 : ");
         scanf("%d", &position);
-        // printf(" 입력행 내용 : ");
         // fflush(stdin);
-        while (getchar() != '\n')
+        while (getchar() != '\n') //개행문자를 받을때까지 계속 통과한다.
             continue;
         fgets(line, MAX_CHAR_PER_LINE, stdin);
 
@@ -146,7 +144,7 @@ public :
         scanf("%d", &position);
         // printf(" 변경행 내용 : ");
         // fflush(stdin);
-        while (getchar() != '\n')
+        while (getchar() != '\n') //개행문자를 받을때까지 계속 통과한다.
             continue;
         fgets(line, MAX_CHAR_PER_LINE, stdin);
         
@@ -201,14 +199,14 @@ int main(){
         switch(command){
             case 'd': {
                 editor.DeleteLine(); 
-                if(getchar() == '\n'){
+                if(getchar() == '\n'){ //개행문자를 받을때까지 계속 통과한다.
                     continue;
                 }
             } // 한 행 삭제 
             case 'i': editor.InsertLine(); break; // 한 행 삽입 
             case 'r': editor.ReplaceLine(); break; // 한 행 변경 
             case 'f' : editor.FindReplace(); break; //찾아 바꾸기
-            case 'p': {
+            case 'p': { //개행문자를 받을때까지 계속 통과한다.
                 editor.Display(); 
                 if(getchar() == '\n'){
                     continue;
@@ -216,7 +214,6 @@ int main(){
             }
             case 'q': break;
         }
-        
         //fflush(stdin); //입력버퍼 지우기
     }while(command != 'q');
     return 0;
