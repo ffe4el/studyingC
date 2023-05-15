@@ -1,7 +1,25 @@
 #include <cstdio>
 #include <cstdlib>
 #define MAX_QUEUE_SIZE 100
-#include "BinaryNode.h"
+
+class BinaryNode{
+protected:
+    int data;
+    BinaryNode *left;
+    BinaryNode *right;
+public :
+    BinaryNode(int val=0, BinaryNode *l = NULL, BinaryNode *r=NULL)
+        :data(val), left(l), right(r) { }
+    ~BinaryNode() { }
+
+    void setDAta(int val) {data = val;}
+    void setLeft(BinaryNode *l) {left = l;}
+    void setRight(BinaryNode *r){right = r;}
+    int getData() {return data;}
+    BinaryNode* getLeft() {return left;}
+    BinaryNode* getRight() {return right;}
+    bool isLeaf() {return left == NULL && right == NULL;}
+};
 
 class CircularQueue
 {
@@ -48,22 +66,22 @@ public :
     //후위순회
     void postorder() {printf("\n postorder: "); postorder(root);}
     //레벨순회
-    void levelorder(){
-        printf("\nlevelorder: ");
-        if(!isEmpty()){
-            CircularQueue q;
-            q.enqueue(root);
-            while(!q.isEmpty()){
-                BinaryNode* n = q.dequeue();
-                if( n != NULL ) {
-					printf(" [%c] ", n->getData());
-					q.enqueue(n->getLeft ());
-					q.enqueue(n->getRight());
-				}
-            }
-        }
-        printf("\n");
-    }
+    // void levelorder(){
+    //     printf("\nlevelorder: ");
+    //     if(!isEmpty()){
+    //         CircularQueue q;
+    //         q.enqueue(root);
+    //         while(!q.isEmpty()){
+    //             BinaryNode* n = q.dequeue();
+    //             if( n != NULL ) {
+	// 				printf(" [%c] ", n->getData());
+	// 				q.enqueue(n->getLeft ());
+	// 				q.enqueue(n->getRight());
+	// 			}
+    //         }
+    //     }
+    //     printf("\n");
+    // }
 
     int getCount() {return isEmpty() ? 0:getCount(root);}
     int getLeafCount() {return isEmpty() ? 0:getLeafCount(root);}
@@ -75,9 +93,9 @@ public :
     //균형이 잡혔는지 root부터 확인해주는 함수임
     void isBalanced() {
         if(isBalanced(root) == 0)
-            printf("균형잡힘\n");
-        else
             printf("균형안잡힘\n");
+        else
+            printf("균형잡힘\n");
     }
 
     //트리의 노드 개수를 구하는 함수
@@ -87,11 +105,11 @@ public :
     }
 
     //트리의 단말노드 개수를 구하는 함수
-    int getLeafCount(BinaryNode *node){
-        if(node == NULL) return 0;
-        if(node -> isLeaf()) return 1;
-        else return getLeafCount(node->getLeft() + getLeafCount(node->getRight()));
-    }
+    int getLeafCount(BinaryNode* node) {
+		if (node == NULL) return 0;
+		if (node->isLeaf()) return 1;
+		else return getLeafCount(node->getLeft()) + getLeafCount(node->getRight());
+	}
 
     //트리의 높이를 구하는 함수
     //서브트에 대하여 순환호출하고 서브 트리들의 반환값 중에서 큰 값을 구하여 1을 더해 반환
@@ -110,7 +128,7 @@ public :
             n= n*2;
         }
         if(getCount() == n-1){
-            printf("포화이진트리\n");
+            printf("포화이진트리O\n");
         }
         else{
             printf("포화이진트리X\n");
@@ -158,20 +176,17 @@ public :
             reverse(node -> getLeft());
     }
 
-
-private:
+// private:
     void inorder(BinaryNode *node){
         if(node != NULL){
-            if(node != NULL){
-                if(node -> getLeft() != NULL) inorder(node->getLeft());
-                printf("[%c] ", node->getData());
-                if(node -> getRight() != NULL) inorder(node->getRight());
-            }
+            if(node -> getLeft() != NULL) inorder(node->getLeft());
+            printf("[%d] ", node->getData());
+            if(node -> getRight() != NULL) inorder(node->getRight());
         }
     }
     void preorder(BinaryNode *node) {
 		if( node != NULL ) {
-			printf( " [%c] ", node->getData());
+			printf( "[%d] ", node->getData());
 			if( node->getLeft() != NULL ) preorder(node->getLeft());
 			if( node->getRight()!= NULL ) preorder(node->getRight());
 		}
@@ -180,7 +195,7 @@ private:
 		if( node != NULL ) {
 			if( node->getLeft() != NULL ) postorder(node->getLeft());
 			if( node->getRight()!= NULL ) postorder(node->getRight());
-			printf( " [%c] ", node->getData());
+			printf( "[%d] ", node->getData());
 		}
 	}
 
@@ -190,14 +205,37 @@ private:
 int main(void)
 {
 	BinaryTree tree;
+    //예시1
+    // BinaryNode* h = new BinaryNode(8, NULL, NULL);
+	// BinaryNode* i = new BinaryNode(9, NULL, NULL);
+	// BinaryNode* d = new BinaryNode(4, h, NULL);
+	// BinaryNode* e = new BinaryNode(5, i, NULL);
+	// BinaryNode* b = new BinaryNode(2, d, e);
+	// BinaryNode* f = new BinaryNode(6, NULL, NULL);
+	// BinaryNode* g = new BinaryNode(7, NULL, NULL);
+	// BinaryNode* c = new BinaryNode(3, f, g);
+	// BinaryNode* a = new BinaryNode(1, b, c);
 
-	BinaryNode *d = new BinaryNode('D', NULL, NULL );
-	BinaryNode *e = new BinaryNode('E', NULL, NULL );
-	BinaryNode *b = new BinaryNode('B', d, e );
-	BinaryNode *f = new BinaryNode('F', NULL, NULL );
-	BinaryNode *c = new BinaryNode('C', f, NULL );
-	BinaryNode *a = new BinaryNode('A', b, c );
+    //예시2
+    // BinaryNode* d = new BinaryNode(4, NULL, NULL);
+	// BinaryNode* e = new BinaryNode(5, NULL, NULL);
+	// BinaryNode* b = new BinaryNode(2, d, e);
+	// BinaryNode* f = new BinaryNode(6, NULL, NULL);
+	// BinaryNode* g = new BinaryNode(7, NULL, NULL);
+	// BinaryNode* c = new BinaryNode(3, f, g);
+	// BinaryNode* a = new BinaryNode(1, b, c);
 
+    //예시3
+    BinaryNode* h = new BinaryNode(8, NULL, NULL);
+	BinaryNode* i = new BinaryNode(9, NULL, NULL);
+	BinaryNode* d = new BinaryNode(4, h, NULL);
+	BinaryNode* e = new BinaryNode(5, i, NULL);
+	BinaryNode* b = new BinaryNode(2, d, e);
+	BinaryNode* f = new BinaryNode(6, NULL, NULL);
+	BinaryNode* g = new BinaryNode(7, NULL, NULL);
+	BinaryNode* c = new BinaryNode(3, NULL, NULL);
+	BinaryNode* a = new BinaryNode(1, b, c);
+    
 	tree.setRoot(a);
 	printf("노드의 개수 %d\n", tree.getCount());
 	printf("단말의 개수 %d\n", tree.getLeafCount());
