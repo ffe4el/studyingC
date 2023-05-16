@@ -155,6 +155,7 @@ public :
         }
     }
 
+    //시험에 안나옴(별로 쓸데없음)
     //왼쪽서브트리와 오른쪽 서브트리를 바꾸는 함수
     void reverse(BinaryNode* node){
         //임의 변수 tmp정해서 일단 왼쪽꺼 저장
