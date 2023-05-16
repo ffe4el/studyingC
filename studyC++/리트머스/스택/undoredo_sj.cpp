@@ -28,6 +28,7 @@ public:
       else{
          top++;
          data[top] = al;
+         cout << top <<" ";
       }
    }
    char pop(){
@@ -36,6 +37,7 @@ public:
          top--;
          return al;
       }
+      else{return 0;}
    }
 };
 int main()
