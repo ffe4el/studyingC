@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
+using namespace std;
 
 class BinaryNode{
 protected:
@@ -175,16 +177,16 @@ public :
 
 class BinSrchTree:public BinaryTree{
 public :
-    BinSrchTree(void){}
-    ~BinSrchTree(void){}
+    // BinSrchTree(void){}
+    // ~BinSrchTree(void){}
 
     //탐색연산(키값으로 노드를 탐색하는 함수)
     BinaryNode* search(int key){
         BinaryNode* node = search(root, key);
         if(node != NULL)
-            printf("탐색성공 : 키값이 %d인 노드 = 0x%x\n", node->getData(), node);
+            printf("탐색성공 : 키값이 %d인 노드 = 0x\n", node->getData());
         else
-            printf("탐색tlfvo : 키값이 %d인 노드 없음\n", key);
+            printf("탐색실패 : 키값이 %d인 노드 없음\n", key);
                 return node;
     }
     BinaryNode* search(BinaryNode *n, int key){
@@ -232,17 +234,22 @@ public :
     //삽입연산
     //이진탐색트리에 원소를 삽입하기 위해서는 먼저 탐색을 수행해야한다
     //탐색에 실패한 위치가 바로 새로운 노드를 삽입하는 위치!!
+    void insert(BinaryNode* n){
+        if(n==NULL) return;
+        if(isEmpty()) root = n;
+        else insert(root, n);
+    }
     //순환방법
-    void insertRecur(BinaryNode* r, BinaryNode* n){
+    void insert(BinaryNode* r, BinaryNode* n){
         if(n->getData() == r->getData())
             return ;
         else if(n->getData() < r->getData()){   //새로 입력한 데이터가 기존 데이터보다 작으면
             if(r->getLeft() == NULL) r-> setLeft(n); //기존데이터의 왼쪽이 비었으면 왼쪽에 위치 시키기
-            else insertRecur(r->getLeft(), n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
+            else insert(r->getLeft(), n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
         }
         else{ //새로 입력한 데이터가 기존 데이터보다 크면
             if(r->getRight()==NULL) r -> setRight(n); //기존데이터의 오른쪽이 비었으면 오른쪽에 위치 시키기
-            else insertRecur(r->getRight(),n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
+            else insert(r->getRight(),n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
         }
     }
 
@@ -253,6 +260,7 @@ public :
     //3.삭제하려는 노드가 두개의 서브트리를 가지고 있는 경우:가장비슷한 값을 가진 노드를 삭제노드 위치로 가져온다.(후계 노드의 선택)
     void remove (int data){
         if(isEmpty()) return;
+        //없앨노드와 그 노드의 부모를 찾는다.
         BinaryNode *parent = NULL;
         BinaryNode *node = root;
         while(node != NULL && node->getData() != data){
@@ -307,5 +315,66 @@ public :
         delete node;
     }
 
+    //균형이 잡혔는지 root부터 확인해주는 함수임
+    bool isBalanced() {
+        if(isBalanced(root) == 0)
+            // printf("균형안잡힘\n");
+            return false;
+        else
+            // printf("균형잡힘\n");
+            return true;
+    }
+
+    //왼쪽서브트리와 오른쪽서브트리의 높이의 차이가 2보다 작으면 균형잡혀있다(balanced)고 본다.
+    bool isBalanced(BinaryNode* node){
+        int hLeft = getHeight(node -> getLeft()); //왼쪽 서브트리 높이 구하기
+        int hRight = getHeight(node -> getRight()); //오른쪽 서브트리 높이 구하기
+        if(hLeft > hRight){
+            if(hLeft - hRight < 2)
+                return true;
+            else{
+                return false;
+            }
+        }
+        else{
+            if(hRight - hLeft < 2)
+                return true;
+            else{
+                return false;
+            }
+        }
+    }
     
 };
+
+int main(){
+    // BinaryNode* 
+    BinSrchTree tree;
+    // BinaryNode* arr[20];
+    int tc;
+    cin >> tc;
+
+    for(int i=0; i<tc; i++){
+        char type;
+        int n;
+        cin >> type >> n;
+        BinaryNode* a = new BinaryNode(n);
+        if(type=='I'){//삽입연산
+            tree.insert(a);
+            // arr[i] = new BinaryNode(n);
+            // tree.insert(arr[i]);
+        }
+        else { //삭제연산
+            tree.remove(n);
+        }
+
+    }
+    if(tree.isBalanced()){
+        cout << "Balanced"<<endl;
+    }
+    else{
+        cout << "Unbalanced"<<endl;
+    }
+
+    return 0;
+}
