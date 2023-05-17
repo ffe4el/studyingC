@@ -11,7 +11,7 @@ public :
         :data(val), left(l), right(r) { }
     ~BinaryNode() { }
 
-    void setDAta(int val) {data = val;}
+    void setData(int val) {data = val;}
     void setLeft(BinaryNode *l) {left = l;}
     void setRight(BinaryNode *r){right = r;}
     int getData() {return data;}
@@ -21,9 +21,9 @@ public :
 };
 
 class BinaryTree{
-private:
-    BinaryNode * root;
-public : 
+
+public :
+    BinaryNode *root; 
     BinaryTree() : root(NULL){ }
     ~BinaryTree() { }
 
@@ -179,6 +179,24 @@ public :
     ~BinSrchTree(void){}
 
     //탐색연산(키값으로 노드를 탐색하는 함수)
+    BinaryNode* search(int key){
+        BinaryNode* node = search(root, key);
+        if(node != NULL)
+            printf("탐색성공 : 키값이 %d인 노드 = 0x%x\n", node->getData(), node);
+        else
+            printf("탐색tlfvo : 키값이 %d인 노드 없음\n", key);
+                return node;
+    }
+    BinaryNode* search(BinaryNode *n, int key){
+        if(n==NULL) return NULL;
+        if(key ==n->getData()) //key==현재노드데이터
+            return n;
+        else if(key < n-> getData()) //key < 현재노드데이터
+            return searchRecur(n->getLeft(), key);
+        else    //key > 현재노드데이터
+            return searchRecur(n->getRight(), key);
+    }
+
     //순환으로 구현
     BinaryNode* searchRecur(BinaryNode *n, int key){
         if(n==NULL) return NULL;
@@ -210,6 +228,84 @@ public :
     //     else    
     //         return NULL;
     // }
+
+    //삽입연산
+    //이진탐색트리에 원소를 삽입하기 위해서는 먼저 탐색을 수행해야한다
+    //탐색에 실패한 위치가 바로 새로운 노드를 삽입하는 위치!!
+    //순환방법
+    void insertRecur(BinaryNode* r, BinaryNode* n){
+        if(n->getData() == r->getData())
+            return ;
+        else if(n->getData() < r->getData()){   //새로 입력한 데이터가 기존 데이터보다 작으면
+            if(r->getLeft() == NULL) r-> setLeft(n); //기존데이터의 왼쪽이 비었으면 왼쪽에 위치 시키기
+            else insertRecur(r->getLeft(), n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
+        }
+        else{ //새로 입력한 데이터가 기존 데이터보다 크면
+            if(r->getRight()==NULL) r -> setRight(n); //기존데이터의 오른쪽이 비었으면 오른쪽에 위치 시키기
+            else insertRecur(r->getRight(),n); //비어있지 않으면 기존데이터의 오른쪽방향으로 다시 삽입함수 돌리기
+        }
+    }
+
+
+    //삭제연산
+    //1.삭제하려는 노드가 단말노드인 경우:단말노드의 부모노드를 찾아서 연결을 끊는다.
+    //2.삭제하려는 노드가 하나의 서브트리만 가지고 있는 경우:노드는 삭제하고, 서브트리를 부모노드에 붙여준다.
+    //3.삭제하려는 노드가 두개의 서브트리를 가지고 있는 경우:가장비슷한 값을 가진 노드를 삭제노드 위치로 가져온다.(후계 노드의 선택)
+    void remove (int data){
+        if(isEmpty()) return;
+        BinaryNode *parent = NULL;
+        BinaryNode *node = root;
+        while(node != NULL && node->getData() != data){
+            parent = node;
+            node = (data < node->getData()) ? node->getLeft():node->getRight();
+        }
+        if(node == NULL){
+            printf(" Error : key is not in the tree!\n");
+            return;
+        }
+        else{remove (parent, node);} //삭제할 노드를 찾았음
+    }
+    void remove(BinaryNode *parent, BinaryNode *node){
+        //1.삭제하려는 노드가 단말노드인 경우
+        if(node->isLeaf()){
+            if(parent ==NULL) root =NULL; //삭제할노드가 root인 경우
+            else{
+                if(parent->getLeft() == node) //노드가 부모의 왼쪽자식일 경우
+                    parent -> setLeft(NULL);  //해당자식을 NULL처리해서 삭제
+                else
+                    parent -> setRight(NULL); //노드가 부모의 오른쪽자식
+            }
+        }
+        //2.삭제하려는 노드가 왼쪽 또는 오른쪽 자식만 가진 경우
+        else if(node->getLeft()==NULL || node->getRight()==NULL){
+            BinaryNode *child = 
+            (node->getLeft() != NULL)?node->getLeft():node->getRight();
+            if(node==root) root = child;
+            else{   //부모노드의 자식으로 자식노드의 child를 직접 연결한다
+                if(parent->getLeft() == node)
+                    parent->setLeft(child);
+                else   
+                    parent->setRight(child);
+            }
+        }
+        //3.삭제하려는 노드가 두개의 child가 있는 경우
+        else{//삭제노드의 오른족 서브트리에서 가장 작은 노드를 탐색
+            BinaryNode* succp = node;
+            BinaryNode* succ = node->getRight();
+            while(succ -> getLeft() != NULL){
+                succp = succ;
+                succ = succ->getLeft();
+            }
+            if(succp->getLeft() == succ)
+                succp->setLeft(succ->getRight());//1.succ의 Rchild를 succp의 Lchild로..
+            else
+                succp->setRight(succ->getRight());//2.succ의 Rchild를 succp의 Rchild로..
+            
+            node->setData(succ->getData()); //삭제노드에 후계노드 정보를 복사
+            node = succ; //후계노드를 삭제
+        }
+        delete node;
+    }
 
     
 };
