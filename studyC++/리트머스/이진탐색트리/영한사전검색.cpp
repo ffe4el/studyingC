@@ -9,13 +9,14 @@ class Record{
     char ko[MAX_WORD_SIZE]; //한국어
     char en[MAX_WORD_SIZE]; //영어
 public : 
-    Record(char* k="", char* e=""){set(k,e);}
+    Record(char* k=" ", char* e=" "){set(k,e);}
     void set(char* k, char* e){
         strcpy(ko, k);
         strcpy(en, e);
     }
     int compare(Record *n){return compare(n->ko);}
     int compare(char* k){return strcmp(k, ko);}
+
     // void display()
     // void copy(Record *n)
 };
@@ -25,7 +26,7 @@ class BinaryNode:public Record{
     BinaryNode *left;
     BinaryNode *right;
 public :
-    BinaryNode(char* k="", char* e="")
+    BinaryNode(char* k=" ", char* e=" ")
         :Record(k,e), left(NULL), right(NULL) { }
     ~BinaryNode() { }
 
@@ -60,12 +61,11 @@ public :
 
 class BinSrchTree:public BinaryTree{
 public :
+//한국어 찾기
     //탐색연산(키값으로 노드를 탐색하는 함수)
     BinaryNode* search(char* key){
         return searchRecur(root, key);
     }
-
-    //순환으로 구현
     BinaryNode* searchRecur(BinaryNode *n, char* key){
         if(n==NULL) return NULL;
         if(n->compare(key)==0) //key==현재노드데이터
@@ -75,6 +75,20 @@ public :
         else    //key > 현재노드데이터
             return searchRecur(n->getRight(), key);
     }
+
+//영어 찾기
+    // BinaryNode* search1(char* key){
+    //     return searchRecur1(root, key);
+    // }
+    // BinaryNode* searchRecur1(BinaryNode *n, char* key){
+    //     if(n==NULL) return NULL;
+    //     if(n->compare1(key)==0) //key==현재노드데이터
+    //         return n;
+    //     else if(n->compare1(key) < 0) //key < 현재노드데이터
+    //         return searchRecur(n->getLeft(), key);
+    //     else    //key > 현재노드데이터
+    //         return searchRecur(n->getRight(), key);
+    // }
     
 
     //삽입연산
@@ -104,6 +118,7 @@ public :
 int main(){
     // BinaryNode* 
     BinSrchTree tree;
+
     // BinaryNode* arr[20];
 
     char type;
@@ -120,7 +135,9 @@ int main(){
             // tree.insert(arr[i]);
         }
         else if(type=='k'){ //한국어를 입력받아 영어를 출력함
-            
+            char korean[20];
+            cin >> korean; 
+            cout << tree.search(korean) << endl;
         }
         else if(type=='e'){ //영어를 입력받아 한국어를 출력함
             
