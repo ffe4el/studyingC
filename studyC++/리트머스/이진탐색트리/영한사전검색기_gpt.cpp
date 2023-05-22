@@ -7,7 +7,7 @@ class Record {
     char ko[MAX_WORD_SIZE]; //한국어
     char en[MAX_WORD_SIZE]; //영어
 public:
-    Record(char* k = " ", char* e = " ") {
+    Record(char* k = "", char* e = "") {
         set(k, e);
     }
     void set(char* k, char* e) {
@@ -16,6 +16,8 @@ public:
     }
     int compare(Record* n) { return compare(n->ko); }
     int compare(char* k) { return strcmp(k, ko); }
+    int compare1(Record* n) { return compare1(n->en); }
+    int compare1(char* e) { return strcmp(e, en); }
 
     void display() {
         cout << ko << " " << en << endl;
@@ -38,7 +40,7 @@ class BinaryNode : public Record {
     BinaryNode* left;
     BinaryNode* right;
 public:
-    BinaryNode(char* k = " ", char* e = " ")
+    BinaryNode(char* k = "", char* e = "")
         : Record(k, e), left(NULL), right(NULL) { }
     ~BinaryNode() { }
 
@@ -55,7 +57,7 @@ protected:
 public:
     BinaryTree() : root(NULL) { }
     ~BinaryTree() { }
-        bool isEmpty() { return root == NULL; }
+    bool isEmpty() { return root == NULL; }
 
     void insert(BinaryNode* node) {
         if (isEmpty()) {
@@ -86,8 +88,37 @@ public:
         }
     }
 
+    void insert1(BinaryNode* node) {
+        if (isEmpty()) {
+            root = node;
+        }
+        else {
+            BinaryNode* current = root;
+            while (true) {
+                if (node->compare1(current) < 0) {
+                    if (current->getLeft() == NULL) {
+                        current->setLeft(node);
+                        break;
+                    }
+                    else {
+                        current = current->getLeft();
+                    }
+                }
+                else {
+                    if (current->getRight() == NULL) {
+                        current->setRight(node);
+                        break;
+                    }
+                    else {
+                        current = current->getRight();
+                    }
+                }
+            }
+        }
+    }
+
     void inorder() {
-        cout << "Inorder: ";
+        // cout << "Inorder: ";
         inorder(root);
         cout << endl;
     }
@@ -115,6 +146,22 @@ public:
         }
         return NULL;
     }
+
+    BinaryNode* search1(char* key) {
+        BinaryNode* current = root;
+        while (current != NULL) {
+            if (current->compare1(key) == 0) {
+                return current;
+            }
+            else if (current->compare1(key) > 0) {
+                current = current->getLeft();
+            }
+            else {
+                current = current->getRight();
+            }
+        }
+        return NULL;
+    }
 };
 
 class Dictionary {
@@ -134,7 +181,7 @@ public:
         Record record(korean, english);
         BinaryNode* node = new BinaryNode();
         node->copy(&record);
-        ek_dictionary.insert(node);
+        ek_dictionary.insert1(node);
     }
 
     void searchKE(char* korean) {
@@ -143,7 +190,7 @@ public:
             cout << "<한국어단어 UNKNOWN ENTRY>" << endl;
         }
         else {
-            cout << result->getEn() << endl;
+            cout << korean << " " << result->getEn() << endl;
         }
     }
 
@@ -153,7 +200,7 @@ public:
             cout << "<영어단어 UNKNOWN ENTRY>" << endl;
         }
         else {
-            cout << result->getKo() << endl;
+            cout << english << " " << result->getKo() << endl;
         }
     }
 
@@ -173,7 +220,7 @@ int main() {
     char choice;
 
     do {
-        cout << "Menu: (i)nsert, (k)orean search, (e)nglish search, (p)rint, (q)uit" << endl;
+        // cout << "Menu: (i)nsert, (k)orean search, (e)nglish search, (p)rint, (q)uit" << endl;
         cin >> choice;
 
         switch (choice) {
