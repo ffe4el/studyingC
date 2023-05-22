@@ -383,9 +383,8 @@ public :
 };
 
 int main(){
-    // BinaryNode* 
     BinSrchTree tree;
-    // BinaryNode* arr[20];
+
     int tc;
     int x;
     cin >> tc >> x;
@@ -397,8 +396,6 @@ int main(){
         BinaryNode* a = new BinaryNode(n);
         if(type=='I'){//삽입연산
             tree.insert(a);
-            // arr[i] = new BinaryNode(n);
-            // tree.insert(arr[i]);
         }
         else { //삭제연산
             tree.remove(n);

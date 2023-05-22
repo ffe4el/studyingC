@@ -318,13 +318,10 @@ public :
     //균형이 잡혔는지 root부터 확인해주는 함수임
     bool isBalanced() {
         if(isBalanced(root) == 0)
-            // printf("균형안잡힘\n");
             return false;
         else
-            // printf("균형잡힘\n");
             return true;
     }
-
     //왼쪽서브트리와 오른쪽서브트리의 높이의 차이가 2보다 작으면 균형잡혀있다(balanced)고 본다.
     bool isBalanced(BinaryNode* node){
         int hLeft = getHeight(node -> getLeft()); //왼쪽 서브트리 높이 구하기
@@ -348,9 +345,8 @@ public :
 };
 
 int main(){
-    // BinaryNode* 
     BinSrchTree tree;
-    // BinaryNode* arr[20];
+
     int tc;
     cin >> tc;
 
@@ -361,8 +357,6 @@ int main(){
         BinaryNode* a = new BinaryNode(n);
         if(type=='I'){//삽입연산
             tree.insert(a);
-            // arr[i] = new BinaryNode(n);
-            // tree.insert(arr[i]);
         }
         else { //삭제연산
             tree.remove(n);

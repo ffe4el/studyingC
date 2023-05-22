@@ -9,7 +9,7 @@ class Record{
     char ko[MAX_WORD_SIZE]; //한국어
     char en[MAX_WORD_SIZE]; //영어
 public : 
-    Record(char* k=" ", char* e=" "){set(k,e);}
+    Record(char* k="", char* e=""){set(k,e);}
     void set(char* k, char* e){
         strcpy(ko, k);
         strcpy(en, e);
@@ -17,8 +17,9 @@ public :
     int compare(Record *n){return compare(n->ko);}
     int compare(char* k){return strcmp(k, ko);}
 
-    // void display()
-    // void copy(Record *n)
+    void display(){
+        printf("%s %s\n", ko, en);
+    }
 };
 
 
@@ -53,7 +54,7 @@ public :
     void inorder(BinaryNode *node){
         if(node != NULL){
             inorder(node->getLeft());
-            // node->display();
+            node->display();
             inorder(node->getRight());
         }
     }
@@ -75,22 +76,7 @@ public :
         else    //key > 현재노드데이터
             return searchRecur(n->getRight(), key);
     }
-
-//영어 찾기
-    // BinaryNode* search1(char* key){
-    //     return searchRecur1(root, key);
-    // }
-    // BinaryNode* searchRecur1(BinaryNode *n, char* key){
-    //     if(n==NULL) return NULL;
-    //     if(n->compare1(key)==0) //key==현재노드데이터
-    //         return n;
-    //     else if(n->compare1(key) < 0) //key < 현재노드데이터
-    //         return searchRecur(n->getLeft(), key);
-    //     else    //key > 현재노드데이터
-    //         return searchRecur(n->getRight(), key);
-    // }
     
-
     //삽입연산
     //이진탐색트리에 원소를 삽입하기 위해서는 먼저 탐색을 수행해야한다
     //탐색에 실패한 위치가 바로 새로운 노드를 삽입하는 위치!!
@@ -115,35 +101,57 @@ public :
 
 };
 
-int main(){
-    BinSrchTree tree;
-
-
-    char type;
-    while(type != 'q'){
-        cin >> type;
-        
-        if(type=='i'){//삽입연산
-            char korean[30];
-            char english[30]; 
-
-            cin >> korean >> english;
-            BinaryNode* a = new BinaryNode(korean, english);
-            tree.insert(a);
-        }
-        else if(type=='k'){ //한국어를 입력받아 영어를 출력함
-            char korean[20];
-            cin >> korean; 
-            cout << tree.search(korean) << endl;
-        }
-        else if(type=='e'){ //영어를 입력받아 한국어를 출력함
-            
-        }
-        else if(type=='p'){ //한, 영 둘다 출력
-
-        }
+class Dictionary : public BinSrchTree
+{
+public:
+    void printAllWords() {
+        if (!isEmpty()) inorder(root);
     }
+    void searchWord(char* word) {
+        BinaryNode* node = search(word);
+        if (node != NULL)
+            node->display();
+        else
+            printf("%s UNKNOWN ENTRY\n", word);
+    }
+};
+ 
+int main(void)
+{
+    char command;
+    char korean[100];
+    char english[100];
+    Dictionary ke;
+    Dictionary ek;  
+do{
+        cin >> command;
+        cin.ignore();
+        switch (command) {
+        case'i':
+            gets(korean);
+            gets(english);
+            ke.insert(new BinaryNode(korean, english));
+            ek.insert(new BinaryNode(english, korean));
+            break;
 
-
-    return 0;
+        case'p':
+            printf("K-E dictionary:\n");
+            ke.printAllWords();
+            printf("E-K dictionary:\n");
+            ek.printAllWords();
+            break;
+ 
+        case'k':
+            cin>>korean;
+            cin.ignore();
+            ke.searchWord(korean);
+            break;
+ 
+        case'e':
+            cin>>english;
+            cin.ignore();
+            ek.searchWord(english);
+            break;
+        }
+    } while (command != 'q');
 }

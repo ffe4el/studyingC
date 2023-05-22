@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <cstdio>
 #define MAX_WORD_SIZE 100
 using namespace std;
 
@@ -122,12 +123,10 @@ public:
     }
 
     void inorder() {
-        // cout << "Inorder: ";
         inorder(root);
         cout << endl;
     }
     void inorder1() {
-        // cout << "Inorder: ";
         inorder1(root);
         cout << endl;
     }
@@ -242,9 +241,12 @@ int main() {
         switch (choice) {
         case 'i': {
             char korean[MAX_WORD_SIZE], english[MAX_WORD_SIZE];
+            // cin.ignore();
+            // getline(cin, korean);
+            // getline(cin, english);
             cin >> korean >> english;
-            // gets(korean);
-            // gets(english);
+            // fgets(korean, sizeof(korean),stdin);
+            // fgets(english, sizeof(english), stdin);
             dictionary.insertKE(korean, english);
             dictionary.insertEK(english, korean);
             break;
