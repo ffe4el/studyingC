@@ -126,9 +126,14 @@ int main(){
         cin >> type;
         
         if(type=='i'){//삽입연산
-            char korean[20];
+            char korean[30];
             char english[30]; 
+
             cin >> korean >> english;
+            // cin.getline(korean,30,'\n');
+            // cout<<korean<< endl;
+            // cin.getline(english,30,'\n');
+            // cout<<english<<endl;
             BinaryNode* a = new BinaryNode(korean, english);
             tree.insert(a);
             // arr[i] = new BinaryNode(n);

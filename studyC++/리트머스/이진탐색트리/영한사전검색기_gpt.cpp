@@ -23,6 +23,10 @@ public:
         cout << ko << " " << en << endl;
     }
 
+    void display1(){
+        cout << en << " "<< ko << endl;
+    }
+
     void copy(Record* n) {
         set(n->ko, n->en);
     }
@@ -66,7 +70,7 @@ public:
         else {
             BinaryNode* current = root;
             while (true) {
-                if (node->compare(current) < 0) {
+                if (node->compare(current) > 0) {
                     if (current->getLeft() == NULL) {
                         current->setLeft(node);
                         break;
@@ -95,7 +99,7 @@ public:
         else {
             BinaryNode* current = root;
             while (true) {
-                if (node->compare1(current) < 0) {
+                if (node->compare1(current) > 0) {
                     if (current->getLeft() == NULL) {
                         current->setLeft(node);
                         break;
@@ -122,12 +126,25 @@ public:
         inorder(root);
         cout << endl;
     }
+    void inorder1() {
+        // cout << "Inorder: ";
+        inorder1(root);
+        cout << endl;
+    }
 
     void inorder(BinaryNode* node) {
         if (node != NULL) {
             inorder(node->getLeft());
             node->display();
             inorder(node->getRight());
+        }
+    }
+
+    void inorder1(BinaryNode* node) {
+        if (node != NULL) {
+            inorder1(node->getLeft());
+            node->display1();
+            inorder1(node->getRight());
         }
     }
 
@@ -195,7 +212,7 @@ public:
     }
 
     void searchEK(char* english) {
-        BinaryNode* result = ek_dictionary.search(english);
+        BinaryNode* result = ek_dictionary.search1(english);
         if (result == NULL) {
             cout << "<영어단어 UNKNOWN ENTRY>" << endl;
         }
@@ -211,7 +228,7 @@ public:
 
     void printEK() {
         cout << "E-K dictionary:" << endl;
-        ek_dictionary.inorder();
+        ek_dictionary.inorder1();
     }
 };
 
@@ -220,13 +237,14 @@ int main() {
     char choice;
 
     do {
-        // cout << "Menu: (i)nsert, (k)orean search, (e)nglish search, (p)rint, (q)uit" << endl;
         cin >> choice;
 
         switch (choice) {
         case 'i': {
             char korean[MAX_WORD_SIZE], english[MAX_WORD_SIZE];
             cin >> korean >> english;
+            // gets(korean);
+            // gets(english);
             dictionary.insertKE(korean, english);
             dictionary.insertEK(english, korean);
             break;
