@@ -10,7 +10,7 @@ public :
     HeapNode(int k=0) : key(k){}
     void setKey(int k){key=k;}
     int getKey() {return key;}
-    void display(){printf("%4d", key);}
+    void display(){printf("%d ", key);}
 };
 
 class MaxHeap{
@@ -31,7 +31,7 @@ public:
         int i= ++size; //증가된 힙 크기 위치에서 시작!
 
         //트리를 거슬러 올라가면서 부모 노드와 비교하는 과정
-        while(i!=1 && key > getParent(i).getKey()){ //루트가 아니고 부모보다 키값이 크면
+        while(i!=1 && key < getParent(i).getKey()){ //루트가 아니고 부모보다 키값이 작으면
             node[i] = getParent(i); //부모를 끌어내림
             i /= 2; //한 레벨 위로 상승시킴
         }
@@ -58,9 +58,20 @@ public:
         return item; // 루트 노드 반환
     }
 
-    HeapNode find() {return node[1];}
+    HeapNode find() {
+        node[1].display();
+        return node[1];
+    }
 
-    // void display() {}
+    void display() {
+        for(int i=1, level=1; i<=size; i++){
+            if(i==level){
+                level *= 2;
+            }
+            node[i].display();
+        }
+        printf("\n");
+    }
 };
 
 
@@ -75,7 +86,16 @@ int main(){
         //num을 insert해주기
         heap.insert(num);
     }
-    // heap.display();
+    heap.display();
+    for(int i=1; i<=k; i++){
+        // HeapNode * a = heap.find();
+        // cout << heap.find() << " ";
+        // HeapNode a = heap.find();
+        heap.find();
+        heap.remove();
+        
+    }
+    printf("\n");
 
     return 0;
 }
