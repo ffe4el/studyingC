@@ -58,41 +58,9 @@ public:
         return item; // 루트 노드 반환
     }
 
-    // HeapNode remove()
-    // {
-    //     if (isEmpty())
-    //         return NULL;
-    //     HeapNode root = node[1];
-    //     HeapNode last = node[size--];
- 
-    //     int parent = 1;
-    //     int child = 2;
- 
-    //     while (child <= size)
-    //     {
-    //         if (child < size && getLeft(parent).getKey() > getRight(parent).getKey())
-    //             child++;
-    //         if (last.getKey() <= node[child].getKey())
-    //             break;
-    //         node[parent] = node[child];
-    //         parent = child;
-    //         child *= 2;
-    //     }
-    //     node[parent] = last;
-    //     return root;
-    // }
-
-
-
     HeapNode find() {
-        node[size--].display();
-        return node[size--];
-    }
-
-    void max_find(int a){
-        for(int i=0; i<a;i++){
-            node[size-i].display();
-        }
+        node[1].display();
+        return node[1];
     }
 
     void display() {
@@ -120,12 +88,13 @@ int main(){
     }
     heap.display();
     for(int i=1; i<=k; i++){
-        // heap
-        // // heap.find();
+        // HeapNode * a = heap.find();
+        // cout << heap.find() << " ";
+        // HeapNode a = heap.find();
+        heap.find();
         heap.remove();
+        
     }
-    // heap.max_find(k);
-    heap.display();
     printf("\n");
 
     return 0;
