@@ -10,7 +10,10 @@ public :
     HeapNode(int k=0) : key(k){}
     void setKey(int k){key=k;}
     int getKey() {return key;}
-    void display(){printf("%d ", key);}
+    int display(){
+        // printf("%d ", key);
+        return key;
+    }
 };
 
 class MaxHeap{
@@ -62,31 +65,23 @@ public:
         return node[1];
     }
 
+    int arr[200];
     void display() {
         for(int i=1, level=1; i<=size; i++){
             if(i==level){
                 level *= 2;
             }
-            node[i].display();
+            arr[i-1] = node[i].display();
         }
         printf("\n");
     }
 
-    bool isHeap(){
-        for(int i=1, level=1; i<=size; i++){
-            if(i==level){
-                level *= 2;
-            }
-            node[i].display();
-        }
-        printf("\n");
-    }
 };
 
 
 int main(){
     MaxHeap heap;
-
+    int A[200]; //입력받은 숫자를 넣어줄 배열A
     int n;
     cin >> n;
     for(int i=0; i<n; i++){
@@ -94,11 +89,20 @@ int main(){
         cin >> num;
         //num을 insert해주기
         heap.insert(num);
+        A[i] = num; //배열 A에 입력해주기
     }
     heap.display();
 
-    
-
+    bool flag = true; //힙인지 아닌지 구별할 flag
+    for(int i=0; i<n; i++){
+        //입력받은 배열과 정렬된 힙이 서로 다르면
+        if(A[i] != heap.arr[i]){ 
+            flag = false; //힙이 아님
+            break;
+        }
+    }
+    if(flag==true) printf("YES");
+    else if(flag == false) printf("NO");
     printf("\n");
 
     return 0;
