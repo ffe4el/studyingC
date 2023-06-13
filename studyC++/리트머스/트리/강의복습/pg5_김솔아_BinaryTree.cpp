@@ -169,7 +169,7 @@ public :
         //왼쪽노드가 안비어있을때만
         if(node->getLeft() != NULL)
             //왼쪽노드 reverse돌리기
-        reverse(node -> getLeft());
+            reverse(node -> getLeft());
 
         //오른쪽노드가 안비어있을때만
         if(node->getLeft() != NULL)
@@ -178,13 +178,6 @@ public :
     }
 
 // private:
-    void inorder(BinaryNode *node){
-        if(node != NULL){
-            if(node -> getLeft() != NULL) inorder(node->getLeft());
-            printf("[%d] ", node->getData());
-            if(node -> getRight() != NULL) inorder(node->getRight());
-        }
-    }
     void preorder(BinaryNode *node) {
 		if( node != NULL ) {
 			printf( "[%d] ", node->getData());
@@ -192,6 +185,13 @@ public :
 			if( node->getRight()!= NULL ) preorder(node->getRight());
 		}
 	}
+    void inorder(BinaryNode *node){
+        if(node != NULL){
+            if(node -> getLeft() != NULL) inorder(node->getLeft());
+            printf("[%d] ", node->getData());
+            if(node -> getRight() != NULL) inorder(node->getRight());
+        }
+    }
 	void postorder(BinaryNode *node) {
 		if( node != NULL ) {
 			if( node->getLeft() != NULL ) postorder(node->getLeft());
