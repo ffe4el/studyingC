@@ -63,12 +63,6 @@ public:
         return node[size--];
     }
 
-    void max_find(int a){
-        for(int i=0; i<a;i++){
-            node[size-i].display();
-        }
-    }
-
     void display() {
         for(int i=1, level=1; i<=size; i++){
             if(i==level){
